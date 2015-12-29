@@ -12,6 +12,8 @@
 		532533E91C32E43D00016730 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E81C32E43D00016730 /* ViewController.m */; };
 		532533EC1C32E43D00016730 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 532533EA1C32E43D00016730 /* Main.storyboard */; };
 		532533EE1C32E43E00016730 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532533ED1C32E43E00016730 /* Assets.xcassets */; };
+		532533F81C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png in Resources */ = {isa = PBXBuildFile; fileRef = 532533F71C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png */; };
+		532533FA1C32FA0500016730 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532533F91C32FA0500016730 /* View.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		532533EB1C32E43D00016730 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		532533ED1C32E43E00016730 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		532533EF1C32E43E00016730 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		532533F71C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Screenshot 2015-12-23 23.58.06.png"; path = "../../../../Dropbox/Screenshots/Screenshot 2015-12-23 23.58.06.png"; sourceTree = "<group>"; };
+		532533F91C32FA0500016730 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,7 @@
 		532533E01C32E43D00016730 /* spike1 */ = {
 			isa = PBXGroup;
 			children = (
+				532533F71C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png */,
 				532533E41C32E43D00016730 /* AppDelegate.h */,
 				532533E51C32E43D00016730 /* AppDelegate.m */,
 				532533E71C32E43D00016730 /* ViewController.h */,
@@ -64,6 +69,7 @@
 				532533ED1C32E43E00016730 /* Assets.xcassets */,
 				532533EF1C32E43E00016730 /* Info.plist */,
 				532533E11C32E43D00016730 /* Supporting Files */,
+				532533F91C32FA0500016730 /* View.xib */,
 			);
 			path = spike1;
 			sourceTree = "<group>";
@@ -133,7 +139,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				532533FA1C32FA0500016730 /* View.xib in Resources */,
 				532533EE1C32E43E00016730 /* Assets.xcassets in Resources */,
+				532533F81C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png in Resources */,
 				532533EC1C32E43D00016730 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

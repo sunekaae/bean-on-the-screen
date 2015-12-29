@@ -19,17 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+
+    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    [self tick];
 }
 
 -(NSString*)getRandomImageUrl{
     // http://stackoverflow.com/questions/160890/generating-random-numbers-in-objective-c
     NSArray *imageUrls = @[
-                           @"https://www.adaptiveshop.se/uploads/news/53/ssl.png",
-                           @"https://7star.se/wp-content/uploads/2014/08/SSL-Security.jpg",
-                           @"https://upload.wikimedia.org/wikipedia/commons/0/03/SSL_SL6000E_and_baby_-_20090722.jpg"];
-    imageUrls = @[@"http://weknowyourdreams.com/images/babies/babies-04.jpg"];
-    NSInteger randomInt = arc4random_uniform(imageUrls.count);
+                           @"https://tinybeans.com/pv/e/25086002/bbf9ba00-cef9-478a-afee-dd7e0a72f46e-o.jpg",
+                           @"https://tinybeans.com/pv/e/24969285/60c86cea-623f-4bb2-b0b7-531c7a734737-o.jpg",
+                           @"https://tinybeans.com/pv/e/24974772/0684e447-bca4-4201-b414-2f6f3a55d174-o.jpg",
+                           @"https://tinybeans.com/pv/e/24974702/b0e28ae1-abf8-4a8d-86dc-fd9d8c0187b2-o.jpg",
+                           @"https://tinybeans.com/pv/e/24974763/8dfd618d-43a7-4c78-86a3-8659879a975c-o.jpg"];
+    NSInteger randomInt = arc4random_uniform((int)imageUrls.count);
     return imageUrls[randomInt];
 }
 

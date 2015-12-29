@@ -14,6 +14,7 @@
 		532533EE1C32E43E00016730 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 532533ED1C32E43E00016730 /* Assets.xcassets */; };
 		532533F81C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png in Resources */ = {isa = PBXBuildFile; fileRef = 532533F71C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png */; };
 		532533FA1C32FA0500016730 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532533F91C32FA0500016730 /* View.xib */; };
+		532534031C3328E200016730 /* example_response in Resources */ = {isa = PBXBuildFile; fileRef = 532534021C3328E200016730 /* example_response */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		532533EF1C32E43E00016730 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		532533F71C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Screenshot 2015-12-23 23.58.06.png"; path = "../../../../Dropbox/Screenshots/Screenshot 2015-12-23 23.58.06.png"; sourceTree = "<group>"; };
 		532533F91C32FA0500016730 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
+		532534021C3328E200016730 /* example_response */ = {isa = PBXFileReference; lastKnownFileType = folder; path = example_response; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		532533E01C32E43D00016730 /* spike1 */ = {
 			isa = PBXGroup;
 			children = (
+				532534021C3328E200016730 /* example_response */,
 				532533F71C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png */,
 				532533E41C32E43D00016730 /* AppDelegate.h */,
 				532533E51C32E43D00016730 /* AppDelegate.m */,
@@ -140,6 +143,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				532533FA1C32FA0500016730 /* View.xib in Resources */,
+				532534031C3328E200016730 /* example_response in Resources */,
 				532533EE1C32E43E00016730 /* Assets.xcassets in Resources */,
 				532533F81C32F66400016730 /* Screenshot 2015-12-23 23.58.06.png in Resources */,
 				532533EC1C32E43D00016730 /* Main.storyboard in Resources */,

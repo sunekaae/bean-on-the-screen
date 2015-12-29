@@ -46,20 +46,18 @@ NSMutableArray *arrayOfImageUrls;
         
     
     // get JSON from web
-//    NSData *postData = [someStringToPost dataUsingEncoding:NSUTF8StringEncoding];
-    
+    // example from http://stackoverflow.com/questions/10300353/nsurlrequest-post-data-and-read-the-posted-page
     NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"];
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"GET"];
     [req setValue:@"access_token=b43acdd1-3ea9-4d03-8289-63d50f31a2e3" forHTTPHeaderField:@"Cookie"];
-//      [req setHTTPBody:postData];
     
     NSError *err = nil;
     NSHTTPURLResponse *res = nil;
     NSData *retData = [NSURLConnection sendSynchronousRequest:req returningResponse:&res error:&err];
     if (err)
     {
-        //handle error
+        NSLog(@"error happened calling API");
     }
     else
     {
@@ -95,10 +93,6 @@ NSMutableArray *arrayOfImageUrls;
             NSString *imageUrl = [blobsDictionary objectForKey:@"o"];
 //            NSLog(@"imageUrl %@", imageUrl);
             [arrayOfImageUrls addObject:imageUrl];
-
-            
-            //            id value = [xyz objectForKey:key];
-            // do stuff
         }
     }
     

@@ -16,7 +16,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Screenshot 2015-12-23 23.58.06.png" translatesAutoresizingMaskIntoConstraints="NO" id="tZk-94-Zk9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="green-beans-570px.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tZk-94-Zk9">
                                 <rect key="frame" x="157" y="53" width="1722" height="993"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Small Bean on the Screen Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tyi-26-zS4">
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Screenshot 2015-12-23 23.58.06.png" width="1518" height="844"/>
+        <image name="green-beans-570px.jpg" width="570" height="385"/>
     </resources>
 </document>

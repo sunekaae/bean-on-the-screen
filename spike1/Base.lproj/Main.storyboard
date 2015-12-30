@@ -30,19 +30,10 @@
                                     <action selector="handleLoginButtonClick:" destination="fmv-Zf-xXF" eventType="primaryActionTriggered" id="bzU-lE-1kh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFy-q9-H4O">
-                                <rect key="frame" x="35" y="211" width="290" height="86"/>
-                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
-                                <state key="normal" title="Logout"/>
-                                <connections>
-                                    <action selector="handleLogoutButtonClick:" destination="fmv-Zf-xXF" eventType="primaryActionTriggered" id="fqc-UM-N67"/>
-                                </connections>
-                            </button>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="login" destination="sNp-0G-UMw" id="AKs-Nc-v72"/>
-                        <outlet property="logout" destination="CFy-q9-H4O" id="aSz-Ma-FHE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hHY-Re-Yhe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -70,11 +61,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbb-hK-grC">
+                                <rect key="frame" x="28" y="178" width="223" height="86"/>
+                                <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="handleTheLogoutButtonClick:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="c7X-Ku-YrM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
                         <outlet property="imageView" destination="tZk-94-Zk9" id="m5k-Yf-iFE"/>
+                        <outlet property="logout" destination="hbb-hK-grC" id="6mS-md-lSa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

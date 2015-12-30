@@ -11,6 +11,8 @@
 @interface ViewController : UIViewController {
     
     IBOutlet UIImageView *imageView;
+    __weak IBOutlet UIButton *login;
+    __weak IBOutlet UIButton *logout;
 }
 
 

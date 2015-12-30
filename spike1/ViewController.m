@@ -18,19 +18,25 @@ NSMutableArray *arrayOfImageUrls;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initStuff];
-
-    [self parseJson];
-    [self printImageUrls];
     
-    // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
-
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
-    [self tick];
+    if ([self authenticatedUser]) {
+        [self parseJson];
+        //    [self printImageUrls];
+        
+        // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
+        
+        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+        [self tick];
+    }
 }
 
 -(void) initStuff {
     arrayOfImageUrls = [[NSMutableArray alloc] init];
 }
+
+
+
+
 
 -(void) printImageUrls {
     NSLog(@"count in array: %d", (int)arrayOfImageUrls.count);
@@ -50,7 +56,9 @@ NSMutableArray *arrayOfImageUrls;
     NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"];
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"GET"];
-    [req setValue:@"access_token=b43acdd1-3ea9-4d03-8289-63d50f31a2e3" forHTTPHeaderField:@"Cookie"];
+    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
+
+    [req setValue:authTokenUrlPartial forHTTPHeaderField:@"Cookie"];
     
     NSError *err = nil;
     NSHTTPURLResponse *res = nil;
@@ -146,5 +154,48 @@ NSMutableArray *arrayOfImageUrls;
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)handleLoginButtonClick:(id)sender {
+    NSLog(@"login");
+    [self saveAuthToken:@"b43acdd1-3ea9-4d03-8289-63d50f31a2e3"];
+//    [self loadAuthToken];
+}
+
+- (IBAction)handleLogoutButtonClick:(id)sender {
+    NSLog(@"logout");
+    [self clearAuthToken];
+}
+
+-(void) saveAuthToken:(NSString*) authToken {
+    // via: http://stackoverflow.com/questions/3074483/save-string-to-the-nsuserdefaults
+    NSLog(@"saving auth token: %@", authToken);
+    [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:@"tinyBeansAuthToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSString*) loadAuthToken {
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
+    NSLog(@"loaded auth token: %@", authToken);
+    return authToken;
+}
+
+-(void) clearAuthToken {
+    NSLog(@"clearing auth token");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tinyBeansAuthToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+// TODO: refactor to put shared code somewhere.
+// COPY COPY COPY
+
+-(BOOL)authenticatedUser {
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
+    NSLog(@"auth token: %@", authToken);
+    if (nil==authToken) {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
 
 @end

@@ -18,7 +18,31 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     application.idleTimerDisabled = true;
+    
+    // via: http://stackoverflow.com/questions/19962276/best-practices-for-storyboard-login-screen-handling-clearing-of-data-upon-logou
+    if (![self authenticatedUser])
+    {
+        self.window.rootViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateInitialViewController];
+    }
+    else
+    {
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+
+        self.window.rootViewController = navigation;
+    }
     return YES;
+}
+
+-(BOOL)authenticatedUser {
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
+    NSLog(@"auth token: %@", authToken);
+    if (nil==authToken) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -42,5 +66,8 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+
 
 @end

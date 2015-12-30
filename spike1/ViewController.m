@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -14,23 +15,37 @@
 
 @implementation ViewController
 NSMutableArray *arrayOfImageUrls;
+AppDelegate *appDelegate;
+NSTimer *timer;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initStuff];
     
-    if ([self authenticatedUser]) {
+
+    if ([appDelegate authenticatedUser]) {
         [self parseJson];
         //    [self printImageUrls];
         
         // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
         
-        [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
-        [self tick];
+        [self scheduleTimer];
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self cancelTimer];
+}
+
+-(void)scheduleTimer
+{
+    timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    [self tick];
+}
+
 -(void) initStuff {
+    appDelegate = [[UIApplication sharedApplication] delegate];
     arrayOfImageUrls = [[NSMutableArray alloc] init];
 }
 
@@ -157,13 +172,25 @@ NSMutableArray *arrayOfImageUrls;
 - (IBAction)handleLoginButtonClick:(id)sender {
     NSLog(@"login");
     [self saveAuthToken:@"b43acdd1-3ea9-4d03-8289-63d50f31a2e3"];
+    
+    
+    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
+    
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    appDelegateTemp.window.rootViewController = navigation;
+    
 //    [self loadAuthToken];
+    
+//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"login"];
+//]
+//    [self presentModalViewController:vc animated:YES];
+
+//        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
 }
 
-- (IBAction)handleLogoutButtonClick:(id)sender {
-    NSLog(@"logout");
-    [self clearAuthToken];
-}
+
 
 -(void) saveAuthToken:(NSString*) authToken {
     // via: http://stackoverflow.com/questions/3074483/save-string-to-the-nsuserdefaults
@@ -184,9 +211,36 @@ NSMutableArray *arrayOfImageUrls;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (IBAction)handleTheLogoutButtonClick:(id)sender {
+    NSLog(@"logout");
+    [self cancelTimer];
+    [self clearAuthToken];
+    
+    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login"];
+    
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    appDelegateTemp.window.rootViewController = navigation;
+}
+
+
+-(void) cancelTimer
+{
+    //BEFORE DOING SO CHECK THAT TIMER MUST NOT BE ALREADY INVALIDATED
+    //Always nil your timer after invalidating so that
+    //it does not cause crash due to duplicate invalidate
+    if(timer)
+    {
+        [timer invalidate];
+        timer = nil;
+    }
+}
+
+
 // TODO: refactor to put shared code somewhere.
 // COPY COPY COPY
 
+/*
 -(BOOL)authenticatedUser {
     NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
     NSLog(@"auth token: %@", authToken);
@@ -197,5 +251,6 @@ NSMutableArray *arrayOfImageUrls;
         return true;
     }
 }
+ */
 
 @end

@@ -254,13 +254,8 @@ NSTimer *timer;
                 // via: http://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-error
                 dispatch_async(dispatch_get_main_queue(), ^{
                     lblStatus.text = @"login successful";
-
-                    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-                    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
-                    
-                    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-                    appDelegateTemp.window.rootViewController = navigation;
                 });
+                [self switchToSlideShow];
                 
             }
             else
@@ -274,6 +269,19 @@ NSTimer *timer;
     
     [postDataTask resume];
     return true;
+}
+
+-(void) switchToSlideShow
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        lblStatus.text = @"login successful";
+        
+        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
+        
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        appDelegateTemp.window.rootViewController = navigation;
+    });
 }
 
 

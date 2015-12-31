@@ -22,12 +22,12 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="sunekaae+tinybeans@gmail.com" borderStyle="roundedRect" placeholder="email" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Mr7-G6-BYs">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="txtEmail" borderStyle="roundedRect" placeholder="email" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="Mr7-G6-BYs">
                                 <rect key="frame" x="277" y="78" width="690" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="FiveOpal25" borderStyle="roundedRect" placeholder="password" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="j2u-wh-1bB">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="txtPassword" borderStyle="roundedRect" placeholder="password" textAlignment="natural" adjustsFontSizeToFit="NO" minimumFontSize="10" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="j2u-wh-1bB">
                                 <rect key="frame" x="277" y="147" width="690" height="46"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -52,10 +52,19 @@
                                     <action selector="handleLoginButtonClick:" destination="fmv-Zf-xXF" eventType="primaryActionTriggered" id="bzU-lE-1kh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lblStatus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7pT-M7-GOE">
+                                <rect key="frame" x="51" y="353" width="396" height="95"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="lblStatus" destination="7pT-M7-GOE" id="gm0-Oj-2Pb"/>
                         <outlet property="login" destination="sNp-0G-UMw" id="AKs-Nc-v72"/>
+                        <outlet property="txtEmail" destination="Mr7-G6-BYs" id="jTF-cz-gnt"/>
+                        <outlet property="txtPassword" destination="j2u-wh-1bB" id="QBc-98-Gll"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hHY-Re-Yhe" userLabel="First Responder" sceneMemberID="firstResponder"/>

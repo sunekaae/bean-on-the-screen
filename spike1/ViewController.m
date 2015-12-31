@@ -47,6 +47,16 @@ NSTimer *timer;
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
     arrayOfImageUrls = [[NSMutableArray alloc] init];
+    
+    lblStatus.text = @"";
+    
+    [self setTextBoxesToHardcodedLogin];
+}
+
+-(void) setTextBoxesToHardcodedLogin
+{
+    txtEmail.text = @"sunekaae+tinybeans@gmail.com";
+    txtPassword.text = @"FiveOpal25";
 }
 
 
@@ -103,7 +113,8 @@ NSTimer *timer;
     NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error: &e];
     
     if (!jsonData) {
-        NSLog(@"Error parsing JSON: %@", e); }
+        NSLog(@"Error parsing JSON: %@", e);
+    }
     else {
         NSArray *entriesArray = [jsonData objectForKey:@"entries"];
 //        NSLog(@"entry item %@", entriesArray[0]);
@@ -171,23 +182,118 @@ NSTimer *timer;
 
 - (IBAction)handleLoginButtonClick:(id)sender {
     NSLog(@"login");
-    [self saveAuthToken:@"b43acdd1-3ea9-4d03-8289-63d50f31a2e3"];
     
+    NSLog(@"txtEmail: %@", txtEmail.text);
+    NSLog(@"txtPassword: %@", txtPassword.text);
     
+    lblStatus.text = @"processing login...";
+    
+    [self doHttpLogin];
+    
+ 
+ //   [self saveAuthToken:@"b43acdd1-3ea9-4d03-8289-63d50f31a2e3"];
+
+    
+  }
+
+-(void) changeToSlideshow
+{
     AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
     UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
     
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
     appDelegateTemp.window.rootViewController = navigation;
     
-//    [self loadAuthToken];
     
-//    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"login"];
-//]
-//    [self presentModalViewController:vc animated:YES];
+    //    [self loadAuthToken];
+    
+    //    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"login"];
+    //]
+    //    [self presentModalViewController:vc animated:YES];
+    
+    //        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
 
-//        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
+}
+
+-(bool) doHttpLogin
+{
+    // VIA: http://stackoverflow.com/questions/19099448/send-post-request-using-nsurlsession
+    NSError *error;
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/authenticate"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
+                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                       timeoutInterval:60.0];
+    
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    
+    [request setHTTPMethod:@"POST"];
+    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys: @"d324d503-0127-4a85-a547-d9f2439ffeae", @"clientId",
+                             txtEmail.text, @"username",
+                             txtPassword.text, @"password",
+                             nil];
+    NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
+    [request setHTTPBody:postData];
+    
+    
+    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSLog(@"data handler?");
+        NSLog(@"error: %@", error);
+        NSLog(@"response: %@", response);
+        
+        if (nil!=error)
+        {
+            NSLog(@"Error making http request: %@", error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                lblStatus.text = @"error trying to login";
+            });
+        }
+       
+        NSError *newe = nil;
+        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &newe];
+
+        if (!jsonData)
+        {
+            NSLog(@"Error parsing JSON: %@", newe);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                lblStatus.text = @"error happened";
+            });
+        }
+        else
+        {
+            NSLog(@"jsonData: %@", jsonData);
+            NSString *authToken = [jsonData objectForKey:@"accessToken"];
+            NSLog(@"authToken: %@", authToken);
+            if (nil!=authToken)
+            {
+                [self saveAuthToken:authToken];
+                // via: http://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-error
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    lblStatus.text = @"login successful";
+
+                    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+                    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
+                    
+                    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+                    appDelegateTemp.window.rootViewController = navigation;
+                });
+                
+            }
+            else
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    lblStatus.text = @"login failed.";
+                });
+            }
+        }
+    }];
+    
+    [postDataTask resume];
+    return true;
 }
 
 

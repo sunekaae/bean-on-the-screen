@@ -55,12 +55,12 @@ NSTimer *timer;
 
 -(void) setTextBoxesToHardcodedLogin
 {
-    txtEmail.text = @"sunekaae+tinybeans@gmail.com";
-    txtPassword.text = @"FiveOpal25";
+    // txtEmail.text = @"sunekaae+tinybeans@gmail.com";
+    // txtPassword.text = @"FiveOpal25";
+    
+    txtEmail.text = @"sune151231@gmail.com";
+    txtPassword.text = @"ABcdefgh";
 }
-
-
-
 
 
 -(void) printImageUrls {
@@ -79,7 +79,8 @@ NSTimer *timer;
     // get JSON from web
     // example from http://stackoverflow.com/questions/10300353/nsurlrequest-post-data-and-read-the-posted-page
     NSString *urlString = [NSString stringWithFormat:@"%@/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977", [self loadJournalId]];
-    NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"];
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSLog(@"calling URL: %@", url);
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"GET"];
     NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
@@ -143,6 +144,7 @@ NSTimer *timer;
     
     NSError *err = nil;
     NSHTTPURLResponse *res = nil;
+    NSLog(@"getting URL: %@", url);
     NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&res error:&err];
     if (err)
     { NSLog(@"getJournal: error happened calling API"); }
@@ -249,6 +251,7 @@ NSTimer *timer;
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
     NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/authenticate"];
+    NSLog(@"calling URL: %@", url);
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];

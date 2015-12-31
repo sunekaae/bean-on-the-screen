@@ -118,8 +118,6 @@ NSTimer *timer;
     else {
         NSArray *entriesArray = [jsonData objectForKey:@"entries"];
 //        NSLog(@"entry item %@", entriesArray[0]);
-        
-        //        NSDictionary *entryDictionary = entriesArray[0];
         for (NSDictionary* entryDictionary in entriesArray) {
 //            NSLog(@"entry item %@", entryDictionary);
             NSDictionary *blobsDictionary = [entryDictionary objectForKey:@"blobs"];
@@ -129,10 +127,6 @@ NSTimer *timer;
             [arrayOfImageUrls addObject:imageUrl];
         }
     }
-    
-    // earlier version written based on:
-    // http://stackoverflow.com/questions/8588264/accessing-json-data-inside-an-nsdictionary-generated-from-nsjsonserialization
-    
 }
 
 -(NSString*)getJsonFromDisk {
@@ -203,17 +197,6 @@ NSTimer *timer;
     
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
     appDelegateTemp.window.rootViewController = navigation;
-    
-    
-    //    [self loadAuthToken];
-    
-    //    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //    UIViewController *vc = [mainStoryboard instantiateViewControllerWithIdentifier:@"login"];
-    //]
-    //    [self presentModalViewController:vc animated:YES];
-    
-    //        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
-
 }
 
 -(bool) doHttpLogin
@@ -227,9 +210,6 @@ NSTimer *timer;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
                                                            cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                        timeoutInterval:60.0];
-    
-//    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
     [request setHTTPMethod:@"POST"];
     NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys: @"d324d503-0127-4a85-a547-d9f2439ffeae", @"clientId",
@@ -341,22 +321,5 @@ NSTimer *timer;
         timer = nil;
     }
 }
-
-
-// TODO: refactor to put shared code somewhere.
-// COPY COPY COPY
-
-/*
--(BOOL)authenticatedUser {
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
-    NSLog(@"auth token: %@", authToken);
-    if (nil==authToken) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}
- */
 
 @end

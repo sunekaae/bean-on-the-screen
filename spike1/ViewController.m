@@ -78,6 +78,7 @@ NSTimer *timer;
     
     // get JSON from web
     // example from http://stackoverflow.com/questions/10300353/nsurlrequest-post-data-and-read-the-posted-page
+    NSString *urlString = [NSString stringWithFormat:@"%@/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977", [self loadJournalId]];
     NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"];
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"GET"];
@@ -127,6 +128,47 @@ NSTimer *timer;
             [arrayOfImageUrls addObject:imageUrl];
         }
     }
+}
+
+-(bool)getJournal
+{
+    NSLog(@"get journal called");
+    
+    NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/followings?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1"];
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+    [req setHTTPMethod:@"GET"];
+    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
+    
+    [req setValue:authTokenUrlPartial forHTTPHeaderField:@"Cookie"];
+    
+    NSError *err = nil;
+    NSHTTPURLResponse *res = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&res error:&err];
+    if (err)
+    { NSLog(@"getJournal: error happened calling API"); }
+    else
+    { NSLog(@"getJournal: getting response calling API"); }
+    
+    NSError *e = nil;
+    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &e];
+    
+    if (!jsonData)
+    { NSLog(@"Error parsing JSON: %@", e); }
+    else
+    {
+        NSArray *entriesArray = [jsonData objectForKey:@"followings"];
+        NSLog(@"entry item %@", entriesArray[0]);
+        NSDictionary *journalDictionary = [entriesArray[0] objectForKey:@"journal"];
+        NSLog(@"journalDictionary %@", journalDictionary);
+        NSString *journalUrl = [journalDictionary objectForKey:@"URL"];
+        NSLog(@"journalUrl %@", journalUrl);
+        if (nil!=journalUrl)
+        {
+            [self saveJournalId:journalUrl];
+            return true;
+        }
+    }
+    return false;
 }
 
 -(NSString*)getJsonFromDisk {
@@ -254,6 +296,7 @@ NSTimer *timer;
                 // via: http://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-error
                 dispatch_async(dispatch_get_main_queue(), ^{
                     lblStatus.text = @"login successful";
+                    [self getJournal];
                 });
                 [self switchToSlideShow];
                 
@@ -286,6 +329,8 @@ NSTimer *timer;
 
 
 
+
+
 -(void) saveAuthToken:(NSString*) authToken {
     // via: http://stackoverflow.com/questions/3074483/save-string-to-the-nsuserdefaults
     NSLog(@"saving auth token: %@", authToken);
@@ -302,6 +347,24 @@ NSTimer *timer;
 -(void) clearAuthToken {
     NSLog(@"clearing auth token");
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tinyBeansAuthToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void) saveJournalId:(NSString*) journalId {
+    NSLog(@"saving journal ID: %@", journalId);
+    [[NSUserDefaults standardUserDefaults] setObject:journalId forKey:@"journalId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSString*) loadJournalId {
+    NSString *journalId = [[NSUserDefaults standardUserDefaults] stringForKey:@"journalId"];
+    NSLog(@"loaded journal ID: %@", journalId);
+    return journalId;
+}
+
+-(void) clearJournalId {
+    NSLog(@"clearing journal id");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"journalId"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

@@ -74,13 +74,16 @@ NSTimer *timer;
 
 -(void) setTextBoxesToHardcodedLogin
 {
+    /*
     txtEmail.text = @"sunekaae+tinybeans@gmail.com";
     txtPassword.text = @"FiveOpal25";
+    */
     
     /*
     txtEmail.text = @"sune151231@gmail.com";
     txtPassword.text = @"ABcdefgh";
      */
+    
 }
 
 

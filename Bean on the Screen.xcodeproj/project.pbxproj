@@ -268,7 +268,7 @@
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.smallbeanscreen.spike1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
 			};
@@ -283,7 +283,7 @@
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.smallbeanscreen.spike1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
 			};
@@ -308,6 +308,7 @@
 				532533F41C32E43E00016730 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

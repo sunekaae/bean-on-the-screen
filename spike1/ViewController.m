@@ -99,14 +99,21 @@ NSTimer *timer;
     
     // get JSON from web
     // example from http://stackoverflow.com/questions/10300353/nsurlrequest-post-data-and-read-the-posted-page
-    NSString *urlString = [NSString stringWithFormat:@"%@/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977", [self loadJournalId]];
+
+    // using entries endpoint
+//    NSString *urlString = [NSString stringWithFormat:@"%@/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977", [self loadJournalId]];
+    
+    // using latest endpoint
+    NSString *urlString = [NSString stringWithFormat:@"%@/latestUpdates/200?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1", [self loadJournalId]];
+    
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"calling URL: %@", url);
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"GET"];
-    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
 
+    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
     [req setValue:authTokenUrlPartial forHTTPHeaderField:@"Cookie"];
+    [req setValue:[self loadAuthToken] forHTTPHeaderField:@"Authorization"];
     
     NSError *err = nil;
     NSHTTPURLResponse *res = nil;

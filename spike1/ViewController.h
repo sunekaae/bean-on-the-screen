@@ -13,6 +13,8 @@
     IBOutlet UIImageView *imageView;
     __weak IBOutlet UIButton *login;
     __weak IBOutlet UIButton *logout;
+    __weak IBOutlet UIButton *slideshow;
+    
     __weak IBOutlet UITextField *txtEmail;
     __weak IBOutlet UITextField *txtPassword;
     __weak IBOutlet UILabel *lblStatus;

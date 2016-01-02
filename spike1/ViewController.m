@@ -24,12 +24,30 @@ NSTimer *timer;
     
 
     if ([appDelegate authenticatedUser]) {
+        // nothing.
+    }
+    
+    // via: http://stackoverflow.com/questions/11637709/get-the-current-displaying-uiviewcontroller-on-the-screen-in-appdelegate-m
+    UIViewController *vc = [[appDelegate window] rootViewController];
+    NSLog(@"vc title: %@", [vc title]);
+    NSLog(@"string a : %@", NSStringFromClass([self class]));
+    NSLog(@"string b : %@", NSStringFromClass([vc class]));
+    
+    UIView *view = [[[[UIApplication sharedApplication] keyWindow] subviews] lastObject];
+    NSLog(@"view description: %@", [view description]);
+    NSLog(@"string c : %@", NSStringFromClass([view class]));
+    
+    NSLog(@"scenename: %@", [self loadSceneName]);
+    
+    if ([[self loadSceneName] isEqual:@"slideshow"])
+    {
         [self parseJson];
         //    [self printImageUrls];
         
         // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
         
         [self scheduleTimer];
+        //        [self tick];
     }
 }
 
@@ -40,7 +58,8 @@ NSTimer *timer;
 
 -(void)scheduleTimer
 {
-    timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
+    NSLog(@"starting timer.");
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     [self tick];
 }
 
@@ -55,11 +74,13 @@ NSTimer *timer;
 
 -(void) setTextBoxesToHardcodedLogin
 {
-    // txtEmail.text = @"sunekaae+tinybeans@gmail.com";
-    // txtPassword.text = @"FiveOpal25";
+    txtEmail.text = @"sunekaae+tinybeans@gmail.com";
+    txtPassword.text = @"FiveOpal25";
     
+    /*
     txtEmail.text = @"sune151231@gmail.com";
     txtPassword.text = @"ABcdefgh";
+     */
 }
 
 
@@ -187,6 +208,7 @@ NSTimer *timer;
 
 
 -(NSString*)getRandomImageUrl{
+    NSLog(@"getRandomImageUrl called");
     // http://stackoverflow.com/questions/160890/generating-random-numbers-in-objective-c
 /*
     NSArray *imageUrls = @[
@@ -301,7 +323,7 @@ NSTimer *timer;
                     lblStatus.text = @"login successful";
                     [self getJournal];
                 });
-                [self switchToSlideShow];
+                [self switchToOptions];
                 
             }
             else
@@ -320,18 +342,39 @@ NSTimer *timer;
 -(void) switchToSlideShow
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        lblStatus.text = @"login successful";
+//        lblStatus.text = @"login successful";
         
         AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
         UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
         
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
         appDelegateTemp.window.rootViewController = navigation;
+        
+        [self saveSceneName:@"slideshow"];
     });
 }
 
+-(void) switchToOptions
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"options"];
+        
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        appDelegateTemp.window.rootViewController = navigation;
+        [self saveSceneName:@"options"];
+    });
+}
 
-
+-(void) switchToLogin
+{
+    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login"];
+    
+    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+    appDelegateTemp.window.rootViewController = navigation;
+    [self saveSceneName:@"login"];
+}
 
 
 -(void) saveAuthToken:(NSString*) authToken {
@@ -371,21 +414,40 @@ NSTimer *timer;
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
-- (IBAction)handleTheLogoutButtonClick:(id)sender {
+-(NSString*) loadSceneName {
+    NSString *sceneName = [[NSUserDefaults standardUserDefaults] stringForKey:@"sceneName"];
+    NSLog(@"loadSceneName: %@", sceneName);
+    return sceneName;
+}
+
+-(void) saveSceneName:(NSString*) sceneName {
+    [[NSUserDefaults standardUserDefaults] setObject:sceneName forKey:@"sceneName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (IBAction)handleTheLogoutButtonClick:(id)sender
+{
+
+}
+- (IBAction)handleLogoutButtonClickTwo:(id)sender
+{
     NSLog(@"logout");
     [self cancelTimer];
     [self clearAuthToken];
     
-    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login"];
-    
-    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-    appDelegateTemp.window.rootViewController = navigation;
+    [self switchToLogin];
 }
 
+- (IBAction)handleSlideshowButtonClick:(id)sender
+{
+    NSLog(@"slideshow button click");
+    [self switchToSlideShow];
+}
 
 -(void) cancelTimer
 {
+    NSLog(@"cancel timer.");
+
     //BEFORE DOING SO CHECK THAT TIMER MUST NOT BE ALREADY INVALIDATED
     //Always nil your timer after invalidating so that
     //it does not cause crash due to duplicate invalidate
@@ -394,6 +456,22 @@ NSTimer *timer;
         [timer invalidate];
         timer = nil;
     }
+}
+
+
+- (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
+{
+    if ([[self loadSceneName] isEqual:@"slideshow"])
+    {
+        for(UIPress *press in presses) {
+            if(press.type == UIPressTypeMenu)
+            {
+                [self switchToOptions];
+                return;
+            }
+        }
+    }
+    [super pressesEnded:presses withEvent:event];
 }
 
 @end

@@ -15,7 +15,6 @@
 @end
 
 @implementation ViewController
-NSMutableArray *arrayOfImageUrls;
 NSMutableArray *arrayOfPhotoItems;
 AppDelegate *appDelegate;
 NSTimer *timer;
@@ -67,7 +66,6 @@ NSTimer *timer;
 
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
-    arrayOfImageUrls = [[NSMutableArray alloc] init];
     arrayOfPhotoItems = [[NSMutableArray alloc] init];
     
     lblStatus.text = @"";
@@ -89,8 +87,8 @@ NSTimer *timer;
 
 
 -(void) printImageUrls {
-    NSLog(@"count in array: %d", (int)arrayOfImageUrls.count);
-    NSLog(@"array %@", arrayOfImageUrls);
+    NSLog(@"count in array: %d", (int)arrayOfPhotoItems.count);
+    NSLog(@"array %@", arrayOfPhotoItems);
 }
 
 -(void) parseJson {
@@ -158,7 +156,6 @@ NSTimer *timer;
 //            NSLog(@"blob item %@", blobsDictionary);
             NSString *imageUrl = [blobsDictionary objectForKey:@"o"];
 //            NSLog(@"imageUrl %@", imageUrl);
-            [arrayOfImageUrls addObject:imageUrl];
             PhotoItem *photoItem = [[PhotoItem alloc] init];
             [photoItem setImageUrl:imageUrl];
             [photoItem setYear:@"2015"];
@@ -223,26 +220,20 @@ NSTimer *timer;
 }
 
 
-
--(NSString*)getRandomImageUrl{
-    NSLog(@"getRandomImageUrl called");
-    // http://stackoverflow.com/questions/160890/generating-random-numbers-in-objective-c
-/*
-    NSArray *imageUrls = @[
-                           @"https://tinybeans.com/pv/e/25086002/bbf9ba00-cef9-478a-afee-dd7e0a72f46e-o.jpg",
-                           @"https://tinybeans.com/pv/e/24969285/60c86cea-623f-4bb2-b0b7-531c7a734737-o.jpg",
-                           @"https://tinybeans.com/pv/e/24974772/0684e447-bca4-4201-b414-2f6f3a55d174-o.jpg",
-                           @"https://tinybeans.com/pv/e/24974702/b0e28ae1-abf8-4a8d-86dc-fd9d8c0187b2-o.jpg",
-                           @"https://tinybeans.com/pv/e/24974763/8dfd618d-43a7-4c78-86a3-8659879a975c-o.jpg"];
-*/
-    
-    NSInteger randomInt = arc4random_uniform((int)arrayOfImageUrls.count);
-    return arrayOfImageUrls[randomInt];
-}
-
 // http://stackoverflow.com/questions/160890/generating-random-numbers-in-objective-c
 -(PhotoItem*)getRandomPhotoItem{
     NSLog(@"getRandomPhotoItem called");
+
+    /*
+     previously used hardcoded image items.
+     NSArray *imageUrls = @[
+     @"https://tinybeans.com/pv/e/25086002/bbf9ba00-cef9-478a-afee-dd7e0a72f46e-o.jpg",
+     @"https://tinybeans.com/pv/e/24969285/60c86cea-623f-4bb2-b0b7-531c7a734737-o.jpg",
+     @"https://tinybeans.com/pv/e/24974772/0684e447-bca4-4201-b414-2f6f3a55d174-o.jpg",
+     @"https://tinybeans.com/pv/e/24974702/b0e28ae1-abf8-4a8d-86dc-fd9d8c0187b2-o.jpg",
+     @"https://tinybeans.com/pv/e/24974763/8dfd618d-43a7-4c78-86a3-8659879a975c-o.jpg"];
+     */
+    
     NSInteger randomInt = arc4random_uniform((int)arrayOfPhotoItems.count);
     return arrayOfPhotoItems[randomInt];
 }

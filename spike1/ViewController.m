@@ -158,9 +158,9 @@ NSTimer *timer;
 //            NSLog(@"imageUrl %@", imageUrl);
             PhotoItem *photoItem = [[PhotoItem alloc] init];
             [photoItem setImageUrl:imageUrl];
-            [photoItem setYear:@"2015"];
-            [photoItem setMonth:@"12"];
-            [photoItem setDay:@"12"];
+            [photoItem setYear: [entryDictionary objectForKey:@"year"]];
+            [photoItem setMonth: [entryDictionary objectForKey:@"month"]];
+            [photoItem setDay: [entryDictionary objectForKey:@"day"]];
             [arrayOfPhotoItems addObject:photoItem];
         }
     }
@@ -242,6 +242,11 @@ NSTimer *timer;
     NSLog(@"tick...");
     
     PhotoItem* photoItem = [self getRandomPhotoItem];
+    [self setPhotoItemOnScreen:photoItem];
+}
+
+-(void)setPhotoItemOnScreen:(PhotoItem*)photoItem {
+    NSLog(@"About to set photoItem %@.", photoItem.day);
     [self setImageOnScreen:photoItem.imageUrl];
     [self setDateOnScreen:photoItem];
 }
@@ -253,6 +258,8 @@ NSTimer *timer;
 
 -(void)setDateOnScreen:(PhotoItem*)photoItem {
     NSLog(@"About to set date. year: %@. month: %@. day: %@", photoItem.year, photoItem.month, photoItem.day);
+    NSString *yearMonthDayString = [NSString stringWithFormat:@"%@-%@-%@", photoItem.year, photoItem.month, photoItem.day];
+    [lblYearMonthDay setText:yearMonthDayString];
 }
 
 - (void)didReceiveMemoryWarning {

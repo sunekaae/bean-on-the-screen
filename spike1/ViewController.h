@@ -18,6 +18,7 @@
     __weak IBOutlet UITextField *txtEmail;
     __weak IBOutlet UITextField *txtPassword;
     __weak IBOutlet UILabel *lblStatus;
+    __weak IBOutlet UILabel *lblYearMonthDay;
 }
 
 

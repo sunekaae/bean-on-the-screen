@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import "PhotoItem.h"
 
 @interface ViewController ()
 
@@ -15,6 +16,7 @@
 
 @implementation ViewController
 NSMutableArray *arrayOfImageUrls;
+NSMutableArray *arrayOfPhotoItems;
 AppDelegate *appDelegate;
 NSTimer *timer;
 
@@ -66,6 +68,7 @@ NSTimer *timer;
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
     arrayOfImageUrls = [[NSMutableArray alloc] init];
+    arrayOfPhotoItems = [[NSMutableArray alloc] init];
     
     lblStatus.text = @"";
     
@@ -74,10 +77,8 @@ NSTimer *timer;
 
 -(void) setTextBoxesToHardcodedLogin
 {
-    /*
     txtEmail.text = @"sunekaae+tinybeans@gmail.com";
     txtPassword.text = @"FiveOpal25";
-    */
     
     /*
     txtEmail.text = @"sune151231@gmail.com";
@@ -158,6 +159,12 @@ NSTimer *timer;
             NSString *imageUrl = [blobsDictionary objectForKey:@"o"];
 //            NSLog(@"imageUrl %@", imageUrl);
             [arrayOfImageUrls addObject:imageUrl];
+            PhotoItem *photoItem = [[PhotoItem alloc] init];
+            [photoItem setImageUrl:imageUrl];
+            [photoItem setYear:@"2015"];
+            [photoItem setMonth:@"12"];
+            [photoItem setDay:@"12"];
+            [arrayOfPhotoItems addObject:photoItem];
         }
     }
 }
@@ -233,16 +240,28 @@ NSTimer *timer;
     return arrayOfImageUrls[randomInt];
 }
 
+// http://stackoverflow.com/questions/160890/generating-random-numbers-in-objective-c
+-(PhotoItem*)getRandomPhotoItem{
+    NSLog(@"getRandomPhotoItem called");
+    NSInteger randomInt = arc4random_uniform((int)arrayOfPhotoItems.count);
+    return arrayOfPhotoItems[randomInt];
+}
+
 -(void)tick {
     NSLog(@"tick...");
     
-    NSString* imageUrl = [self getRandomImageUrl];
-    [self setImageOnScreen:imageUrl];
+    PhotoItem* photoItem = [self getRandomPhotoItem];
+    [self setImageOnScreen:photoItem.imageUrl];
+    [self setDateOnScreen:photoItem];
 }
 
 -(void)setImageOnScreen:(NSString*)imageUrl {
     NSLog(@"About to load image: %@ ", imageUrl);
     imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+}
+
+-(void)setDateOnScreen:(PhotoItem*)photoItem {
+    NSLog(@"About to set date. year: %@. month: %@. day: %@", photoItem.year, photoItem.month, photoItem.day);
 }
 
 - (void)didReceiveMemoryWarning {

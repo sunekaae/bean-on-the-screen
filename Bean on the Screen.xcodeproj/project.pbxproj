@@ -15,6 +15,7 @@
 		532533FA1C32FA0500016730 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532533F91C32FA0500016730 /* View.xib */; };
 		532534031C3328E200016730 /* example_response in Resources */ = {isa = PBXBuildFile; fileRef = 532534021C3328E200016730 /* example_response */; };
 		532534051C34114A00016730 /* green-beans-570px.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 532534041C34114A00016730 /* green-beans-570px.jpg */; };
+		538C1F201C3D9ADE00157BC7 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,8 @@
 		532533F91C32FA0500016730 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		532534021C3328E200016730 /* example_response */ = {isa = PBXFileReference; lastKnownFileType = folder; path = example_response; sourceTree = "<group>"; };
 		532534041C34114A00016730 /* green-beans-570px.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "green-beans-570px.jpg"; sourceTree = "<group>"; };
+		538C1F1E1C3D9ADE00157BC7 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
+		538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,8 @@
 				532533EF1C32E43E00016730 /* Info.plist */,
 				532533E11C32E43D00016730 /* Supporting Files */,
 				532533F91C32FA0500016730 /* View.xib */,
+				538C1F1E1C3D9ADE00157BC7 /* PhotoItem.h */,
+				538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */,
 			);
 			name = "Bean on the Screen";
 			path = spike1;
@@ -162,6 +167,7 @@
 				532533E91C32E43D00016730 /* ViewController.m in Sources */,
 				532533E61C32E43D00016730 /* AppDelegate.m in Sources */,
 				532533E31C32E43D00016730 /* main.m in Sources */,
+				538C1F201C3D9ADE00157BC7 /* PhotoItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

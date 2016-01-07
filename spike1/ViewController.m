@@ -159,11 +159,22 @@ NSTimer *timer;
             PhotoItem *photoItem = [[PhotoItem alloc] init];
             [photoItem setImageUrl:imageUrl];
             [photoItem setYear: [entryDictionary objectForKey:@"year"]];
-            [photoItem setMonth: [entryDictionary objectForKey:@"month"]];
-            [photoItem setDay: [entryDictionary objectForKey:@"day"]];
+            NSNumber *monthNumber = [entryDictionary objectForKey:@"month"];
+            NSString *monthString = [self getAsTwoDigitString:monthNumber];
+            [photoItem setMonth: monthString];
+            NSNumber *dayNumber = [entryDictionary objectForKey:@"day"];
+            NSString *dayString = [self getAsTwoDigitString:dayNumber];
+            [photoItem setDay: dayString];
             [arrayOfPhotoItems addObject:photoItem];
         }
     }
+}
+
+// take an integer as input, and return a string with a leading zero if needed to make a two digit string.
+-(NSString*)getAsTwoDigitString:(NSNumber*) oneOrTwoDigitNumber {
+    NSString *twoDigitString = [NSString stringWithFormat:@"%@", oneOrTwoDigitNumber];
+    if ([twoDigitString length] == 1) { twoDigitString = [NSString stringWithFormat:@"0%@", twoDigitString]; }
+    return twoDigitString;
 }
 
 -(bool)getJournal

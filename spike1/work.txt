@@ -1,0 +1,11 @@
+Work.
+
+DONE
+1.0.1:
+- showing date of each photo in bottom-right corner
+
+TODO
+- random ordering of photos instead of picking a new random photo each time
+- ability to show all photos instead of only the 200 most recent
+
+

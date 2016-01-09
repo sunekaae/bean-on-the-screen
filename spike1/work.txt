@@ -9,5 +9,6 @@ DONE
 TODO
 - random ordering of photos instead of picking a new random photo each time
 - ability to show all photos instead of only the 200 most recent
+- add version number info box to app (eg )http://stackoverflow.com/questions/7957794/how-to-get-your-own-app-version-from-xcode)
 
 

@@ -17,6 +17,7 @@
 		532534051C34114A00016730 /* green-beans-570px.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 532534041C34114A00016730 /* green-beans-570px.jpg */; };
 		538C1F201C3D9ADE00157BC7 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */; };
 		53AB65A81C41997C006163E1 /* work.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53AB65A71C41997C006163E1 /* work.txt */; };
+		53AB65AA1C41A3B5006163E1 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53AB65A91C41A3B5006163E1 /* readme.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		538C1F1E1C3D9ADE00157BC7 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
 		538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
 		53AB65A71C41997C006163E1 /* work.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = work.txt; sourceTree = "<group>"; };
+		53AB65A91C41A3B5006163E1 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				538C1F1E1C3D9ADE00157BC7 /* PhotoItem.h */,
 				538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */,
 				53AB65A71C41997C006163E1 /* work.txt */,
+				53AB65A91C41A3B5006163E1 /* readme.txt */,
 			);
 			name = "Bean on the Screen";
 			path = spike1;
@@ -156,6 +159,7 @@
 				53AB65A81C41997C006163E1 /* work.txt in Resources */,
 				532534031C3328E200016730 /* example_response in Resources */,
 				532534051C34114A00016730 /* green-beans-570px.jpg in Resources */,
+				53AB65AA1C41A3B5006163E1 /* readme.txt in Resources */,
 				532533EE1C32E43E00016730 /* Assets.xcassets in Resources */,
 				532533EC1C32E43D00016730 /* Main.storyboard in Resources */,
 			);
@@ -276,11 +280,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 5;
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -291,11 +297,13 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 5;
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

@@ -70,7 +70,7 @@ NSTimer *timer;
     
     lblStatus.text = @"";
     
-    [self setTextBoxesToHardcodedLogin];
+    // [self setTextBoxesToHardcodedLogin];
 }
 
 -(void) setTextBoxesToHardcodedLogin

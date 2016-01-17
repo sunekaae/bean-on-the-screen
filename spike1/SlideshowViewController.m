@@ -40,16 +40,13 @@
     
     NSLog(@"scenename: %@", [appDelegate loadSceneName]);
     
-//    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
-//    {
-        [self parseJson];
-        //    [self printImageUrls];
-        
-        // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
-        
-        [self scheduleTimer];
-        //        [self tick];
-//    }
+    [self parseJson];
+    //    [self printImageUrls];
+    
+    // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
+    
+    [self scheduleTimer];
+    //        [self tick];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -253,16 +250,13 @@
 
 - (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
-//    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
-//    {
-        for(UIPress *press in presses) {
-            if(press.type == UIPressTypeMenu)
-            {
-                [appDelegate switchToOptions];
-                return;
-            }
+    for(UIPress *press in presses) {
+        if(press.type == UIPressTypeMenu)
+        {
+            [appDelegate switchToOptions];
+            return;
         }
-//    }
+    }
     [super pressesEnded:presses withEvent:event];
 }
 

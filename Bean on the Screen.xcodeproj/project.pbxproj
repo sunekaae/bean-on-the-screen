@@ -117,6 +117,7 @@
 				532533DA1C32E43D00016730 /* Sources */,
 				532533DB1C32E43D00016730 /* Frameworks */,
 				532533DC1C32E43D00016730 /* Resources */,
+				539B934D1C4C45A1000CC498 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -176,6 +177,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		539B934D1C4C45A1000CC498 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${DEVELOPER_BIN_DIR}/agvtool\" next-version -all";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		532533DA1C32E43D00016730 /* Sources */ = {
@@ -292,7 +309,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
@@ -309,7 +326,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;

@@ -11,6 +11,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
 -(BOOL)authenticatedUser;
 
 -(void) saveAuthToken:(NSString*) authToken;
@@ -25,6 +26,8 @@
 -(void) clearJournalId;
 
 -(void) switchToOptions;
+
+-(NSMutableArray*) getArrayOfPhotoItems;
 
 @end
 

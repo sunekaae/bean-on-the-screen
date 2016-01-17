@@ -15,7 +15,6 @@
 @end
 
 @implementation ViewController {
-    NSMutableArray *arrayOfPhotoItems;
     AppDelegate *appDelegate;
     NSTimer *timer;
 }
@@ -41,8 +40,8 @@
     
     NSLog(@"scenename: %@", [appDelegate loadSceneName]);
     
-    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
-    {
+//    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
+//    {
         [self parseJson];
         //    [self printImageUrls];
         
@@ -50,11 +49,12 @@
         
         [self scheduleTimer];
         //        [self tick];
-    }
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self cancelTimer];
 }
 
@@ -67,12 +67,11 @@
 
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
-    arrayOfPhotoItems = [[NSMutableArray alloc] init];
 }
 
 -(void) printImageUrls {
-    NSLog(@"count in array: %d", (int)arrayOfPhotoItems.count);
-    NSLog(@"array %@", arrayOfPhotoItems);
+    NSLog(@"count in array: %d", (int)[appDelegate getArrayOfPhotoItems].count);
+    NSLog(@"array %@", [appDelegate getArrayOfPhotoItems]);
 }
 
 -(void) parseJson {
@@ -149,7 +148,7 @@
             NSNumber *dayNumber = [entryDictionary objectForKey:@"day"];
             NSString *dayString = [self getAsTwoDigitString:dayNumber];
             [photoItem setDay: dayString];
-            [arrayOfPhotoItems addObject:photoItem];
+            [[appDelegate getArrayOfPhotoItems] addObject:photoItem];
         }
     }
 }
@@ -189,8 +188,8 @@
      @"https://tinybeans.com/pv/e/24974763/8dfd618d-43a7-4c78-86a3-8659879a975c-o.jpg"];
      */
     
-    NSInteger randomInt = arc4random_uniform((int)arrayOfPhotoItems.count);
-    return arrayOfPhotoItems[randomInt];
+    NSInteger randomInt = arc4random_uniform((int)[appDelegate getArrayOfPhotoItems].count);
+    return [appDelegate getArrayOfPhotoItems][randomInt];
 }
 
 -(void)tick {
@@ -234,53 +233,8 @@
 
 
 
--(void) switchToSlideShow
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-//        lblStatus.text = @"login successful";
-        
-        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"slideshow"];
-        
-        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-        appDelegateTemp.window.rootViewController = navigation;
-        
-        [appDelegate saveSceneName:@"slideshow"];
-    });
-}
 
 
--(void) switchToLogin
-{
-    AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-    UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"login"];
-    
-    UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-    appDelegateTemp.window.rootViewController = navigation;
-    [appDelegate saveSceneName:@"login"];
-}
-
-
-
-
-- (IBAction)handleTheLogoutButtonClick:(id)sender
-{
-
-}
-- (IBAction)handleLogoutButtonClickTwo:(id)sender
-{
-    NSLog(@"logout");
-    [self cancelTimer];
-    [appDelegate clearAuthToken];
-    
-    [self switchToLogin];
-}
-
-- (IBAction)handleSlideshowButtonClick:(id)sender
-{
-    NSLog(@"slideshow button click");
-    [self switchToSlideShow];
-}
 
 -(void) cancelTimer
 {
@@ -299,8 +253,8 @@
 
 - (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
-    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
-    {
+//    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
+//    {
         for(UIPress *press in presses) {
             if(press.type == UIPressTypeMenu)
             {
@@ -308,7 +262,7 @@
                 return;
             }
         }
-    }
+//    }
     [super pressesEnded:presses withEvent:event];
 }
 

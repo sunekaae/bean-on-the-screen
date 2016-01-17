@@ -77,10 +77,10 @@
             </objects>
             <point key="canvasLocation" x="-999" y="221"/>
         </scene>
-        <!--View Controller-->
+        <!--Options View Controller-->
         <scene sceneID="h1T-3a-kdN">
             <objects>
-                <viewController storyboardIdentifier="options" id="17k-Tu-fQk" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="options" id="17k-Tu-fQk" customClass="OptionsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jGE-aY-uYt"/>
                         <viewControllerLayoutGuide type="bottom" id="m65-ir-1af"/>

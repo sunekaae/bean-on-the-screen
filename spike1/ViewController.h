@@ -11,8 +11,6 @@
 @interface ViewController : UIViewController {
     
     IBOutlet UIImageView *imageView;
-    __weak IBOutlet UIButton *logout;
-    __weak IBOutlet UIButton *slideshow;
     __weak IBOutlet UILabel *lblYearMonthDay;
 }
 

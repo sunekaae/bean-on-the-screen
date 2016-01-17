@@ -12,8 +12,9 @@
 
 @end
 
-@implementation AppDelegate
-
+@implementation AppDelegate {
+    NSMutableArray *arrayOfPhotoItems;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -48,12 +49,12 @@
 -(void) switchToOptions
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self saveSceneName:@"options"];
         AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
         UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"options"];
         
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
         appDelegateTemp.window.rootViewController = navigation;
-        [self saveSceneName:@"options"];
     });
 }
 
@@ -106,6 +107,19 @@
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"journalId"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+-(NSMutableArray*) getArrayOfPhotoItems {
+//    NSMutableArray *arrayOfPhotoItems = [[NSUserDefaults standardUserDefaults] objectForKey:@"arrayOfPhotoItems"];
+    NSLog(@"arrayOfPhotoItems: %@", arrayOfPhotoItems);
+    if (nil == arrayOfPhotoItems) {
+        NSLog(@"arrayOfPhotoItems is nil. doing init");
+        arrayOfPhotoItems = [[NSMutableArray alloc] init];
+//        [[NSUserDefaults standardUserDefaults] setObject:arrayOfPhotoItems forKey:@"arrayOfPhotoItems"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    return arrayOfPhotoItems;
+}
+
 
 
 

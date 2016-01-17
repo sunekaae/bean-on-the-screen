@@ -6,15 +6,15 @@
 //  Copyright © 2015 Sune Kaae. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SlideshowViewController.h"
 #import "AppDelegate.h"
 #import "PhotoItem.h"
 
-@interface ViewController ()
+@interface SlideshowViewController ()
 
 @end
 
-@implementation ViewController {
+@implementation SlideshowViewController {
     AppDelegate *appDelegate;
     NSTimer *timer;
 }

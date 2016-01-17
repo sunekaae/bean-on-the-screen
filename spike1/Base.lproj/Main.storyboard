@@ -126,10 +126,10 @@
             </objects>
             <point key="canvasLocation" x="1161" y="210"/>
         </scene>
-        <!--View Controller-->
+        <!--Slideshow View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="slideshow" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="slideshow" id="BYZ-38-t0r" customClass="SlideshowViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>

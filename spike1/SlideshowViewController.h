@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController {
+@interface SlideshowViewController : UIViewController {
     
     IBOutlet UIImageView *imageView;
     __weak IBOutlet UILabel *lblYearMonthDay;

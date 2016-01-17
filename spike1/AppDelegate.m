@@ -110,7 +110,6 @@
 
 -(NSMutableArray*) getArrayOfPhotoItems {
 //    NSMutableArray *arrayOfPhotoItems = [[NSUserDefaults standardUserDefaults] objectForKey:@"arrayOfPhotoItems"];
-    NSLog(@"arrayOfPhotoItems: %@", arrayOfPhotoItems);
     if (nil == arrayOfPhotoItems) {
         NSLog(@"arrayOfPhotoItems is nil. doing init");
         arrayOfPhotoItems = [[NSMutableArray alloc] init];

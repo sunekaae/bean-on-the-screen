@@ -45,6 +45,69 @@
     }
 }
 
+-(void) switchToOptions
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
+        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"options"];
+        
+        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
+        appDelegateTemp.window.rootViewController = navigation;
+        [self saveSceneName:@"options"];
+    });
+}
+
+
+-(void) saveAuthToken:(NSString*) authToken {
+    // via: http://stackoverflow.com/questions/3074483/save-string-to-the-nsuserdefaults
+    NSLog(@"saving auth token: %@", authToken);
+    [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:@"tinyBeansAuthToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSString*) loadAuthToken {
+    NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
+    NSLog(@"loaded auth token: %@", authToken);
+    return authToken;
+}
+
+-(void) clearAuthToken {
+    NSLog(@"clearing auth token");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tinyBeansAuthToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
+-(NSString*) loadSceneName {
+    NSString *sceneName = [[NSUserDefaults standardUserDefaults] stringForKey:@"sceneName"];
+    NSLog(@"loadSceneName: %@", sceneName);
+    return sceneName;
+}
+
+-(void) saveSceneName:(NSString*) sceneName {
+    [[NSUserDefaults standardUserDefaults] setObject:sceneName forKey:@"sceneName"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(void) saveJournalId:(NSString*) journalId {
+    NSLog(@"saving journal ID: %@", journalId);
+    [[NSUserDefaults standardUserDefaults] setObject:journalId forKey:@"journalId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSString*) loadJournalId {
+    NSString *journalId = [[NSUserDefaults standardUserDefaults] stringForKey:@"journalId"];
+    NSLog(@"loaded journal ID: %@", journalId);
+    return journalId;
+}
+
+-(void) clearJournalId {
+    NSLog(@"clearing journal id");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"journalId"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+
 
 
 

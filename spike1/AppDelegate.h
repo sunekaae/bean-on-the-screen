@@ -13,5 +13,18 @@
 @property (strong, nonatomic) UIWindow *window;
 -(BOOL)authenticatedUser;
 
+-(void) saveAuthToken:(NSString*) authToken;
+-(NSString*) loadAuthToken;
+-(void) clearAuthToken;
+
+-(NSString*) loadSceneName;
+-(void) saveSceneName:(NSString*) sceneName;
+
+-(void) saveJournalId:(NSString*) journalId;
+-(NSString*) loadJournalId;
+-(void) clearJournalId;
+
+-(void) switchToOptions;
+
 @end
 

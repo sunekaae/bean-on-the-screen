@@ -14,10 +14,11 @@
 
 @end
 
-@implementation ViewController
-NSMutableArray *arrayOfPhotoItems;
-AppDelegate *appDelegate;
-NSTimer *timer;
+@implementation ViewController {
+    NSMutableArray *arrayOfPhotoItems;
+    AppDelegate *appDelegate;
+    NSTimer *timer;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,9 +39,9 @@ NSTimer *timer;
     NSLog(@"view description: %@", [view description]);
     NSLog(@"string c : %@", NSStringFromClass([view class]));
     
-    NSLog(@"scenename: %@", [self loadSceneName]);
+    NSLog(@"scenename: %@", [appDelegate loadSceneName]);
     
-    if ([[self loadSceneName] isEqual:@"slideshow"])
+    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
     {
         [self parseJson];
         //    [self printImageUrls];
@@ -67,24 +68,7 @@ NSTimer *timer;
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
     arrayOfPhotoItems = [[NSMutableArray alloc] init];
-    
-    lblStatus.text = @"";
-    
-    // [self setTextBoxesToHardcodedLogin];
 }
-
--(void) setTextBoxesToHardcodedLogin
-{
-    txtEmail.text = @"sunekaae+tinybeans@gmail.com";
-    txtPassword.text = @"FiveOpal25";
-    
-    /*
-    txtEmail.text = @"sune151231@gmail.com";
-    txtPassword.text = @"ABcdefgh";
-     */
-    
-}
-
 
 -(void) printImageUrls {
     NSLog(@"count in array: %d", (int)arrayOfPhotoItems.count);
@@ -106,16 +90,16 @@ NSTimer *timer;
 //    NSString *urlString = [NSString stringWithFormat:@"%@/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977", [self loadJournalId]];
     
     // using latest endpoint
-    NSString *urlString = [NSString stringWithFormat:@"%@/latestUpdates/200?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1", [self loadJournalId]];
+    NSString *urlString = [NSString stringWithFormat:@"%@/latestUpdates/200?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1", [appDelegate loadJournalId]];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSLog(@"calling URL: %@", url);
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
     [req setHTTPMethod:@"GET"];
 
-    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
+    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [appDelegate loadAuthToken]];
     [req setValue:authTokenUrlPartial forHTTPHeaderField:@"Cookie"];
-    [req setValue:[self loadAuthToken] forHTTPHeaderField:@"Authorization"];
+    [req setValue:[appDelegate loadAuthToken] forHTTPHeaderField:@"Authorization"];
     
     NSError *err = nil;
     NSHTTPURLResponse *res = nil;
@@ -177,47 +161,7 @@ NSTimer *timer;
     return twoDigitString;
 }
 
--(bool)getJournal
-{
-    NSLog(@"get journal called");
-    
-    NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/followings?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1"];
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
-    [req setHTTPMethod:@"GET"];
-    NSString *authTokenUrlPartial = [NSString stringWithFormat:@"access_token=%@", [self loadAuthToken]];
-    
-    [req setValue:authTokenUrlPartial forHTTPHeaderField:@"Cookie"];
-    
-    NSError *err = nil;
-    NSHTTPURLResponse *res = nil;
-    NSLog(@"getting URL: %@", url);
-    NSData *data = [NSURLConnection sendSynchronousRequest:req returningResponse:&res error:&err];
-    if (err)
-    { NSLog(@"getJournal: error happened calling API"); }
-    else
-    { NSLog(@"getJournal: getting response calling API"); }
-    
-    NSError *e = nil;
-    NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &e];
-    
-    if (!jsonData)
-    { NSLog(@"Error parsing JSON: %@", e); }
-    else
-    {
-        NSArray *entriesArray = [jsonData objectForKey:@"followings"];
-        NSLog(@"entry item %@", entriesArray[0]);
-        NSDictionary *journalDictionary = [entriesArray[0] objectForKey:@"journal"];
-        NSLog(@"journalDictionary %@", journalDictionary);
-        NSString *journalUrl = [journalDictionary objectForKey:@"URL"];
-        NSLog(@"journalUrl %@", journalUrl);
-        if (nil!=journalUrl)
-        {
-            [self saveJournalId:journalUrl];
-            return true;
-        }
-    }
-    return false;
-}
+
 
 -(NSString*)getJsonFromDisk {
     // http://stackoverflow.com/questions/7064200/parse-json-contents-in-local-file
@@ -278,21 +222,6 @@ NSTimer *timer;
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)handleLoginButtonClick:(id)sender {
-    NSLog(@"login");
-    
-    NSLog(@"txtEmail: %@", txtEmail.text);
-    NSLog(@"txtPassword: %@", txtPassword.text);
-    
-    lblStatus.text = @"processing login...";
-    
-    [self doHttpLogin];
-    
- 
- //   [self saveAuthToken:@"b43acdd1-3ea9-4d03-8289-63d50f31a2e3"];
-
-    
-  }
 
 -(void) changeToSlideshow
 {
@@ -303,79 +232,7 @@ NSTimer *timer;
     appDelegateTemp.window.rootViewController = navigation;
 }
 
--(bool) doHttpLogin
-{
-    // VIA: http://stackoverflow.com/questions/19099448/send-post-request-using-nsurlsession
-    NSError *error;
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    NSURL *url = [NSURL URLWithString:@"https://tinybeans.com/api/1/authenticate"];
-    NSLog(@"calling URL: %@", url);
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url
-                                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                       timeoutInterval:60.0];
-    
-    [request setHTTPMethod:@"POST"];
-    NSDictionary *mapData = [[NSDictionary alloc] initWithObjectsAndKeys: @"d324d503-0127-4a85-a547-d9f2439ffeae", @"clientId",
-                             txtEmail.text, @"username",
-                             txtPassword.text, @"password",
-                             nil];
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:mapData options:0 error:&error];
-    [request setHTTPBody:postData];
-    
-    
-    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        NSLog(@"data handler?");
-        NSLog(@"error: %@", error);
-        NSLog(@"response: %@", response);
-        
-        if (nil!=error)
-        {
-            NSLog(@"Error making http request: %@", error);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                lblStatus.text = @"error trying to login";
-            });
-        }
-       
-        NSError *newe = nil;
-        NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error: &newe];
 
-        if (!jsonData)
-        {
-            NSLog(@"Error parsing JSON: %@", newe);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                lblStatus.text = @"error happened";
-            });
-        }
-        else
-        {
-            NSLog(@"jsonData: %@", jsonData);
-            NSString *authToken = [jsonData objectForKey:@"accessToken"];
-            NSLog(@"authToken: %@", authToken);
-            if (nil!=authToken)
-            {
-                [self saveAuthToken:authToken];
-                // via: http://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-error
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    lblStatus.text = @"login successful";
-                    [self getJournal];
-                });
-                [self switchToOptions];
-                
-            }
-            else
-            {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    lblStatus.text = @"login failed.";
-                });
-            }
-        }
-    }];
-    
-    [postDataTask resume];
-    return true;
-}
 
 -(void) switchToSlideShow
 {
@@ -388,21 +245,10 @@ NSTimer *timer;
         UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
         appDelegateTemp.window.rootViewController = navigation;
         
-        [self saveSceneName:@"slideshow"];
+        [appDelegate saveSceneName:@"slideshow"];
     });
 }
 
--(void) switchToOptions
-{
-    dispatch_async(dispatch_get_main_queue(), ^{
-        AppDelegate *appDelegateTemp = [[UIApplication sharedApplication]delegate];
-        UIViewController* rootController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"options"];
-        
-        UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
-        appDelegateTemp.window.rootViewController = navigation;
-        [self saveSceneName:@"options"];
-    });
-}
 
 -(void) switchToLogin
 {
@@ -411,57 +257,11 @@ NSTimer *timer;
     
     UINavigationController* navigation = [[UINavigationController alloc] initWithRootViewController:rootController];
     appDelegateTemp.window.rootViewController = navigation;
-    [self saveSceneName:@"login"];
+    [appDelegate saveSceneName:@"login"];
 }
 
 
--(void) saveAuthToken:(NSString*) authToken {
-    // via: http://stackoverflow.com/questions/3074483/save-string-to-the-nsuserdefaults
-    NSLog(@"saving auth token: %@", authToken);
-    [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:@"tinyBeansAuthToken"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
--(NSString*) loadAuthToken {
-    NSString *authToken = [[NSUserDefaults standardUserDefaults] stringForKey:@"tinyBeansAuthToken"];
-    NSLog(@"loaded auth token: %@", authToken);
-    return authToken;
-}
-
--(void) clearAuthToken {
-    NSLog(@"clearing auth token");
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"tinyBeansAuthToken"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(void) saveJournalId:(NSString*) journalId {
-    NSLog(@"saving journal ID: %@", journalId);
-    [[NSUserDefaults standardUserDefaults] setObject:journalId forKey:@"journalId"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(NSString*) loadJournalId {
-    NSString *journalId = [[NSUserDefaults standardUserDefaults] stringForKey:@"journalId"];
-    NSLog(@"loaded journal ID: %@", journalId);
-    return journalId;
-}
-
--(void) clearJournalId {
-    NSLog(@"clearing journal id");
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"journalId"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
--(NSString*) loadSceneName {
-    NSString *sceneName = [[NSUserDefaults standardUserDefaults] stringForKey:@"sceneName"];
-    NSLog(@"loadSceneName: %@", sceneName);
-    return sceneName;
-}
-
--(void) saveSceneName:(NSString*) sceneName {
-    [[NSUserDefaults standardUserDefaults] setObject:sceneName forKey:@"sceneName"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
 
 - (IBAction)handleTheLogoutButtonClick:(id)sender
 {
@@ -471,7 +271,7 @@ NSTimer *timer;
 {
     NSLog(@"logout");
     [self cancelTimer];
-    [self clearAuthToken];
+    [appDelegate clearAuthToken];
     
     [self switchToLogin];
 }
@@ -499,12 +299,12 @@ NSTimer *timer;
 
 - (void)pressesBegan:(NSSet<UIPress *> *)presses withEvent:(UIPressesEvent *)event
 {
-    if ([[self loadSceneName] isEqual:@"slideshow"])
+    if ([[appDelegate loadSceneName] isEqual:@"slideshow"])
     {
         for(UIPress *press in presses) {
             if(press.type == UIPressTypeMenu)
             {
-                [self switchToOptions];
+                [appDelegate switchToOptions];
                 return;
             }
         }

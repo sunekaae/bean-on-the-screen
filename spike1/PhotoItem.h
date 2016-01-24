@@ -16,4 +16,6 @@
 @property NSString *month;
 @property NSString *day;
 
+-(NSString*) getDateStringFormattedYYMMDDWithDashes;
+
 @end

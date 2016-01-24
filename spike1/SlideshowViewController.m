@@ -17,6 +17,7 @@
 @implementation SlideshowViewController {
     AppDelegate *appDelegate;
     NSTimer *timer;
+    int currentPhotoItemIndex;
 }
 
 - (void)viewDidLoad {
@@ -44,9 +45,6 @@
     //    [self printImageUrls];
     
     // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
-    
-    [self scheduleTimer];
-    //        [self tick];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -64,6 +62,8 @@
 
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
+    currentPhotoItemIndex = 0; // keep track of which photo item from the photo array is currently shown
+
 }
 
 -(void) printImageUrls {
@@ -108,15 +108,16 @@
     {
         // handle response and returning data
 //        NSData *jsonFeed = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"]];
-  //      NSLog(@"json: %@", jsonFeed);
+//      NSLog(@"json: %@", jsonFeed);
+        NSData* data = retData;
+        
+        
+        //    NSData *jsonFeed = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"]];
+        //    NSLog(@"json: %@", jsonFeed);
+        
+        [self fetchedData:data];
+
     }
-    NSData* data = retData;
-    
-    
-//    NSData *jsonFeed = [NSData dataWithContentsOfURL:[NSURL URLWithString:@"https://tinybeans.com/api/1/journals/425579/entries?clientId=13bcd503-2137-9085-a437-d9f2ac9281a1&fetchSize=200&idsOnly=1&since=1451000041977"]];
-//    NSLog(@"json: %@", jsonFeed);
-    
-    [self fetchedData:data];
 }
 
 // http://www.raywenderlich.com/5492/working-with-json-in-ios-5
@@ -128,10 +129,16 @@
         NSLog(@"Error parsing JSON: %@", e);
     }
     else {
+        NSLog(@"json: %@", jsonData);
         NSArray *entriesArray = [jsonData objectForKey:@"entries"];
 //        NSLog(@"entry item %@", entriesArray[0]);
         for (NSDictionary* entryDictionary in entriesArray) {
 //            NSLog(@"entry item %@", entryDictionary);
+            NSNumber *deleted = [entryDictionary objectForKey:@"deleted"];
+            NSLog(@"deleted: %@", deleted);
+            if (1 == [deleted intValue]) {
+                continue; /// don't use this item, skip to the next
+            }
             NSDictionary *blobsDictionary = [entryDictionary objectForKey:@"blobs"];
 //            NSLog(@"blob item %@", blobsDictionary);
             NSString *imageUrl = [blobsDictionary objectForKey:@"o"];
@@ -148,6 +155,28 @@
             [[appDelegate getArrayOfPhotoItems] addObject:photoItem];
         }
     }
+    
+    [self logArrayInfo];
+    [self randomizeArrayOrder];
+    [self scheduleTimer];
+}
+
+// via http://stackoverflow.com/questions/6255369/how-to-randomize-an-nsmutablearray
+-(void)randomizeArrayOrder {
+    for (int x = 0; x < [[appDelegate getArrayOfPhotoItems] count]; x++) {
+        int randInt = (arc4random() % ([[appDelegate getArrayOfPhotoItems] count] - x)) + x;
+        [[appDelegate getArrayOfPhotoItems] exchangeObjectAtIndex:x withObjectAtIndex:randInt];
+    }
+    
+}
+
+-(void)logArrayInfo {
+    NSLog(@"array count: %d", (int)[[appDelegate getArrayOfPhotoItems] count]);
+    for (int x = 0; x < [[appDelegate getArrayOfPhotoItems] count]; x++) {
+        PhotoItem* photoItem = [appDelegate getArrayOfPhotoItems][x];
+        NSLog(@"item date: %@ URL: %@", photoItem.getDateStringFormattedYYMMDDWithDashes, photoItem.imageUrl);
+    }
+    
 }
 
 // take an integer as input, and return a string with a leading zero if needed to make a two digit string.
@@ -189,15 +218,32 @@
     return [appDelegate getArrayOfPhotoItems][randomInt];
 }
 
+-(PhotoItem*)getNextPhotoItem{
+    NSLog(@"getNextPhotoItem called");
+    int nextPhotoItemIndex = 0;
+ 
+    int countOfPhotoItems = (int)[appDelegate getArrayOfPhotoItems].count;
+    if ( (currentPhotoItemIndex+1) < countOfPhotoItems) {
+        nextPhotoItemIndex = currentPhotoItemIndex+1;
+    } else {
+        // we're at the end, need to restart the index
+        nextPhotoItemIndex = 0;
+    }
+    PhotoItem* photoItem = [appDelegate getArrayOfPhotoItems][nextPhotoItemIndex];
+    currentPhotoItemIndex = nextPhotoItemIndex;
+    return photoItem;
+}
+
+
 -(void)tick {
     NSLog(@"tick...");
     
-    PhotoItem* photoItem = [self getRandomPhotoItem];
+    PhotoItem* photoItem = [self getNextPhotoItem];
     [self setPhotoItemOnScreen:photoItem];
 }
 
 -(void)setPhotoItemOnScreen:(PhotoItem*)photoItem {
-    NSLog(@"About to set photoItem %@.", photoItem.day);
+    NSLog(@"About to set photo item on screen url");
     [self setImageOnScreen:photoItem.imageUrl];
     [self setDateOnScreen:photoItem];
 }
@@ -208,8 +254,8 @@
 }
 
 -(void)setDateOnScreen:(PhotoItem*)photoItem {
-    NSLog(@"About to set date. year: %@. month: %@. day: %@", photoItem.year, photoItem.month, photoItem.day);
-    NSString *yearMonthDayString = [NSString stringWithFormat:@"%@-%@-%@", photoItem.year, photoItem.month, photoItem.day];
+    NSLog(@"About to set date: %@", photoItem.getDateStringFormattedYYMMDDWithDashes);
+    NSString *yearMonthDayString = photoItem.getDateStringFormattedYYMMDDWithDashes;
     [lblYearMonthDay setText:yearMonthDayString];
 }
 

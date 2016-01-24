@@ -303,7 +303,7 @@
 -(void)setDateAndPhotoNumberOnScreen:(PhotoItem*)photoItem {
     NSLog(@"About to set date: %@", photoItem.getDateStringFormattedYYMMDDWithDashes);
     NSString *yearMonthDayString = photoItem.getDateStringFormattedYYMMDDWithDashes;
-    NSString *dateAndPhotoInfoString = [NSString stringWithFormat:@"%@ (%d/%d)", yearMonthDayString, currentPhotoItemIndex, (int)[appDelegate getArrayOfPhotoItems].count];
+    NSString *dateAndPhotoInfoString = [NSString stringWithFormat:@"%@ (%d/%d)", yearMonthDayString, currentPhotoItemIndex+1, (int)[appDelegate getArrayOfPhotoItems].count];
     [lblYearMonthDay setText:dateAndPhotoInfoString];
 }
 

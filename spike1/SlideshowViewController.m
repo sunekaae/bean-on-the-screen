@@ -41,9 +41,16 @@
     
     NSLog(@"scenename: %@", [appDelegate loadSceneName]);
     
-    [self parseJson];
-    //    [self printImageUrls];
-    
+    // via http://stackoverflow.com/questions/20590802/objective-c-trouble-updating-ui-on-main-thread
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        //load your data here.
+        [self parseJson];
+        //    [self printImageUrls];
+        // dispatch_async(dispatch_get_main_queue(), ^{
+            //update UI in main thread.
+        //});
+    });
+
     // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
 }
 
@@ -63,6 +70,7 @@
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
     currentPhotoItemIndex = 0; // keep track of which photo item from the photo array is currently shown
+    [self StartShowingLoadingIndicator];
 
 }
 
@@ -158,7 +166,11 @@
     
     [self logArrayInfo];
     [self randomizeArrayOrder];
-    [self scheduleTimer];
+    NSLog(@"creating async call for schedule timer");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self scheduleTimer];
+    });
+    NSLog(@"done with fetched data");
 }
 
 // via http://stackoverflow.com/questions/6255369/how-to-randomize-an-nsmutablearray
@@ -239,13 +251,31 @@
     NSLog(@"tick...");
     
     PhotoItem* photoItem = [self getNextPhotoItem];
+    [self StopShowingLoadingIndicator];
+
     [self setPhotoItemOnScreen:photoItem];
+}
+
+-(void)StartShowingLoadingIndicator {
+    lblStatus.text = @"loading...";
+    imageView.hidden = true;
+    lblYearMonthDay.hidden = true;
+    lblDateBackground.hidden = true;
+}
+
+-(void)StopShowingLoadingIndicator {
+    lblStatus.text = @"";
+    imageView.hidden = false;
+    lblYearMonthDay.hidden = false;
+    lblDateBackground.hidden = false;;
 }
 
 -(void)setPhotoItemOnScreen:(PhotoItem*)photoItem {
     NSLog(@"About to set photo item on screen url");
-    [self setImageOnScreen:photoItem.imageUrl];
-    [self setDateOnScreen:photoItem];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setImageOnScreen:photoItem.imageUrl];
+        [self setDateOnScreen:photoItem];
+    });
 }
 
 -(void)setImageOnScreen:(NSString*)imageUrl {

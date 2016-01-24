@@ -12,6 +12,8 @@
     
     IBOutlet UIImageView *imageView;
     __weak IBOutlet UILabel *lblYearMonthDay;
+    __weak IBOutlet UILabel *lblStatus;
+    __weak IBOutlet UILabel *lblDateBackground;
 }
 
 

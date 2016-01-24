@@ -41,17 +41,26 @@
     
     NSLog(@"scenename: %@", [appDelegate loadSceneName]);
     
-    // via http://stackoverflow.com/questions/20590802/objective-c-trouble-updating-ui-on-main-thread
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        //load your data here.
-        [self parseJson];
-        //    [self printImageUrls];
-        // dispatch_async(dispatch_get_main_queue(), ^{
+    if (0 == [appDelegate getArrayOfPhotoItems].count) {
+        NSLog(@"There are no items loaded yet. Should retrieve items");
+        // via http://stackoverflow.com/questions/20590802/objective-c-trouble-updating-ui-on-main-thread
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            //load your data here.
+            [self parseJson];
+            //    [self printImageUrls];
+            // dispatch_async(dispatch_get_main_queue(), ^{
             //update UI in main thread.
-        //});
-    });
-
-    // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
+            //});
+        });
+        // http://stackoverflow.com/questions/7700352/repeating-a-method-every-few-seconds-in-objective-c
+    } else {
+        NSLog(@"items already loaded. No need to retrieve them again");
+        NSLog(@"about to schedule timer");
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self scheduleTimer];
+        });
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -291,7 +291,7 @@
     NSLog(@"About to set photo item on screen url");
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setImageOnScreen:photoItem.imageUrl];
-        [self setDateOnScreen:photoItem];
+        [self setDateAndPhotoNumberOnScreen:photoItem];
     });
 }
 
@@ -300,10 +300,11 @@
     imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
 }
 
--(void)setDateOnScreen:(PhotoItem*)photoItem {
+-(void)setDateAndPhotoNumberOnScreen:(PhotoItem*)photoItem {
     NSLog(@"About to set date: %@", photoItem.getDateStringFormattedYYMMDDWithDashes);
     NSString *yearMonthDayString = photoItem.getDateStringFormattedYYMMDDWithDashes;
-    [lblYearMonthDay setText:yearMonthDayString];
+    NSString *dateAndPhotoInfoString = [NSString stringWithFormat:@"%@ (%d/%d)", yearMonthDayString, currentPhotoItemIndex, (int)[appDelegate getArrayOfPhotoItems].count];
+    [lblYearMonthDay setText:dateAndPhotoInfoString];
 }
 
 - (void)didReceiveMemoryWarning {

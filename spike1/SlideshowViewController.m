@@ -133,6 +133,15 @@
     NSError *e = nil;
     NSDictionary *jsonData = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error: &e];
     
+    // via http://stackoverflow.com/questions/2777438/how-to-tell-if-uiviewcontrollers-view-is-visible
+    // if (viewController.isViewLoaded && viewController.view.window)
+    if ([self isViewLoaded] && self.view.window) {
+        NSLog(@"slideshow view controller IS loaded and is visible");
+    } else {
+        NSLog(@"slideshow view controller is NOT loaded OR is NOT visible. exiting.");
+        return;
+    }
+    
     if (!jsonData) {
         NSLog(@"Error parsing JSON: %@", e);
     }
@@ -249,6 +258,14 @@
 
 -(void)tick {
     NSLog(@"tick...");
+    
+    if ([self isViewLoaded] && self.view.window) {
+        NSLog(@"slideshow view controller IS loaded and is visible");
+    } else {
+        NSLog(@"slideshow view controller is NOT loaded OR is NOT visible. exitinig and canceling timer.");
+        [self cancelTimer];
+        return;
+    }
     
     PhotoItem* photoItem = [self getNextPhotoItem];
     [self StopShowingLoadingIndicator];

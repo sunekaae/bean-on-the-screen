@@ -28,8 +28,7 @@
     appDelegate = [[UIApplication sharedApplication] delegate];
     lblStatus.text = @"";
     
-    // FIXME
-    [self setTextBoxesToHardcodedLogin];
+    //[self setTextBoxesToHardcodedLogin];
 }
 
 -(void) setTextBoxesToHardcodedLogin

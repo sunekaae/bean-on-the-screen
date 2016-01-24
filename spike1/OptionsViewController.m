@@ -20,10 +20,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self initStuff];
 }
 
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
+    lblStatus.text = @"";
 }
 
 
@@ -42,6 +44,10 @@
 - (IBAction)handleSlideshowButtonClick:(id)sender
 {
     NSLog(@"slideshow button click");
+    dispatch_async(dispatch_get_main_queue(), ^{
+        lblStatus.text = @"Loading slideshow images...";
+    });
+
     [self switchToSlideShow];
 }
 

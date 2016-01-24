@@ -67,7 +67,7 @@
                         </subviews>
                     </view>
                     <connections>
-                        <outlet property="lblStatus" destination="7pT-M7-GOE" id="gm0-Oj-2Pb"/>
+                        <outlet property="lblStatus" destination="7pT-M7-GOE" id="Llr-Ec-OtY"/>
                         <outlet property="login" destination="sNp-0G-UMw" id="AKs-Nc-v72"/>
                         <outlet property="txtEmail" destination="Mr7-G6-BYs" id="jTF-cz-gnt"/>
                         <outlet property="txtPassword" destination="j2u-wh-1bB" id="QBc-98-Gll"/>
@@ -116,9 +116,16 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="lblStatus" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yc9-NH-jXK">
+                                <rect key="frame" x="100" y="550" width="929" height="35"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="lblStatus" destination="Yc9-NH-jXK" id="RIt-ge-FRO"/>
                         <outlet property="slideshow" destination="8UR-2p-VGA" id="vbD-Hz-DqE"/>
                     </connections>
                 </viewController>

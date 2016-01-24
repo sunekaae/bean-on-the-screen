@@ -11,6 +11,7 @@
 @interface OptionsViewController : UIViewController {
     __weak IBOutlet UIButton *logout;
     __weak IBOutlet UIButton *slideshow;
+    __weak IBOutlet UILabel *lblStatus;
 }
 
 @end

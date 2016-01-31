@@ -28,15 +28,14 @@
     appDelegate = [[UIApplication sharedApplication] delegate];
     lblStatus.text = @"";
     
+    // for development purposes: uncomment this line to have user/pass pre-populated to avoid needing to use remote to type in.
     //[self setTextBoxesToHardcodedLogin];
 }
 
 -(void) setTextBoxesToHardcodedLogin
 {
-    txtEmail.text = @"sunekaae+tinybeans@gmail.com";
-    txtPassword.text = @"aaabbb";
-    
     /*
+     test login. used by Apple in app-submit. non-sensitive demo pictures.
      txtEmail.text = @"sune151231@gmail.com";
      txtPassword.text = @"ABcdefgh";
      */

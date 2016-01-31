@@ -34,7 +34,7 @@
 -(void) setTextBoxesToHardcodedLogin
 {
     txtEmail.text = @"sunekaae+tinybeans@gmail.com";
-    txtPassword.text = @"FiveOpal25";
+    txtPassword.text = @"aaabbb";
     
     /*
      txtEmail.text = @"sune151231@gmail.com";

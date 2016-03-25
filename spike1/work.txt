@@ -4,6 +4,9 @@ Work.
 
 DONE
 
+1.0.4:
+- improvement: text box behavior on login screen (thanks to chrisidefix, https://github.com/chrisidefix)
+
 1.0.3:
 - improvement: showing a "loading..." message instead of waiting for a non-responsive screen
 - improvement: showing number of photos in slideshow and current position

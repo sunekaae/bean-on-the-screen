@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		531EA6371D04EDDF00292D0C /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531EA6361D04EDDF00292D0C /* SDWebImage.framework */; };
 		532533E31C32E43D00016730 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E21C32E43D00016730 /* main.m */; };
 		532533E61C32E43D00016730 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E51C32E43D00016730 /* AppDelegate.m */; };
 		532533E91C32E43D00016730 /* SlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E81C32E43D00016730 /* SlideshowViewController.m */; };
@@ -15,6 +16,7 @@
 		532533FA1C32FA0500016730 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532533F91C32FA0500016730 /* View.xib */; };
 		532534031C3328E200016730 /* example_response in Resources */ = {isa = PBXBuildFile; fileRef = 532534021C3328E200016730 /* example_response */; };
 		532534051C34114A00016730 /* green-beans-570px.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 532534041C34114A00016730 /* green-beans-570px.jpg */; };
+		535B1B061D04E46C00B843A9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535B1B051D04E46C00B843A9 /* ImageIO.framework */; };
 		538C1F201C3D9ADE00157BC7 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */; };
 		539B93491C4C2FBB000CC498 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 539B93481C4C2FBB000CC498 /* LoginViewController.m */; };
 		539B934C1C4C3927000CC498 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 539B934B1C4C3927000CC498 /* OptionsViewController.m */; };
@@ -23,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		531EA6361D04EDDF00292D0C /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		532533DE1C32E43D00016730 /* Bean on the Screen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bean on the Screen.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		532533E21C32E43D00016730 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		532533E41C32E43D00016730 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -35,6 +38,7 @@
 		532533F91C32FA0500016730 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		532534021C3328E200016730 /* example_response */ = {isa = PBXFileReference; lastKnownFileType = folder; path = example_response; sourceTree = "<group>"; };
 		532534041C34114A00016730 /* green-beans-570px.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "green-beans-570px.jpg"; sourceTree = "<group>"; };
+		535B1B051D04E46C00B843A9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		538C1F1E1C3D9ADE00157BC7 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
 		538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
 		539B93471C4C2FBB000CC498 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -50,6 +54,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531EA6371D04EDDF00292D0C /* SDWebImage.framework in Frameworks */,
+				535B1B061D04E46C00B843A9 /* ImageIO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +65,8 @@
 		532533D51C32E43D00016730 = {
 			isa = PBXGroup;
 			children = (
+				531EA6361D04EDDF00292D0C /* SDWebImage.framework */,
+				535B1B051D04E46C00B843A9 /* ImageIO.framework */,
 				532533E01C32E43D00016730 /* Bean on the Screen */,
 				532533DF1C32E43D00016730 /* Products */,
 			);
@@ -309,9 +317,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 176;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					SDWebImage.framework/Versions/Current/SDWebImage,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
@@ -326,9 +342,17 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 176;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"-force_load",
+					SDWebImage.framework/Versions/Current/SDWebImage,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";

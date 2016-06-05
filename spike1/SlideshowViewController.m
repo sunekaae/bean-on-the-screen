@@ -6,6 +6,7 @@
 //  Copyright © 2015 Sune Kaae. All rights reserved.
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "SlideshowViewController.h"
 #import "AppDelegate.h"
 #import "PhotoItem.h"
@@ -306,7 +307,9 @@
 
 -(void)setImageOnScreen:(NSString*)imageUrl {
     NSLog(@"About to load image: %@ ", imageUrl);
-    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+
+    // uses https://github.com/rs/SDWebImage
+    [imageView setImageWithURL:[NSURL URLWithString:imageUrl]];
 }
 
 -(void)setDateAndPhotoNumberOnScreen:(PhotoItem*)photoItem {

@@ -77,6 +77,18 @@
     [self tick];
 }
 
+-(void)loadFirstImage
+{
+    NSLog(@"loading first image, no automatic repeat");
+    [self tick];
+}
+
+-(void)scheduleATick
+{
+    NSLog(@"tick in 5 seconds");
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(tick) userInfo:nil repeats:NO];
+}
+
 -(void) initStuff {
     appDelegate = [[UIApplication sharedApplication] delegate];
     currentPhotoItemIndex = 0; // keep track of which photo item from the photo array is currently shown
@@ -187,7 +199,8 @@
     [self randomizeArrayOrder];
     NSLog(@"creating async call for schedule timer");
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self scheduleTimer];
+        //[self scheduleTimer];
+        [self loadFirstImage];
     });
     NSLog(@"done with fetched data");
 }
@@ -309,7 +322,25 @@
     NSLog(@"About to load image: %@ ", imageUrl);
 
     // uses https://github.com/rs/SDWebImage
-    [imageView setImageWithURL:[NSURL URLWithString:imageUrl]];
+    //[imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    
+    // fade based on: http://stackoverflow.com/questions/11869390/ios-sdwebimage-fade-in-new-image
+    // https://github.com/rs/SDWebImage
+    
+    // request image
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:[NSURL URLWithString:imageUrl]
+                          options:0
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             // progression tracking code
+                         }
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                                // do something with image
+                                [imageView setImage:image];
+                                [self scheduleATick];
+                            }
+                        }];
 }
 
 -(void)setDateAndPhotoNumberOnScreen:(PhotoItem*)photoItem {

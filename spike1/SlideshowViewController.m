@@ -324,7 +324,6 @@
     // uses https://github.com/rs/SDWebImage
     //[imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
     
-    // fade based on: http://stackoverflow.com/questions/11869390/ios-sdwebimage-fade-in-new-image
     // https://github.com/rs/SDWebImage
     
     // request image
@@ -337,7 +336,14 @@
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                             if (image) {
                                 // do something with image
-                                [imageView setImage:image];
+                                
+                                // fade based on: http://stackoverflow.com/questions/11869390/ios-sdwebimage-fade-in-new-image
+                                [UIView transitionWithView:imageView
+                                                  duration:2.0
+                                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                                animations:^{
+                                                    [imageView setImage:image];
+                                                } completion:NULL];
                                 [self scheduleATick];
                             }
                         }];

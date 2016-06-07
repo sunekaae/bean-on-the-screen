@@ -313,12 +313,14 @@
 -(void)setPhotoItemOnScreen:(PhotoItem*)photoItem {
     NSLog(@"About to set photo item on screen url");
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setImageOnScreen:photoItem.imageUrl];
-        [self setDateAndPhotoNumberOnScreen:photoItem];
+        [self setImageAndTextOnScreen:photoItem];
     });
 }
 
--(void)setImageOnScreen:(NSString*)imageUrl {
+-(void)setImageAndTextOnScreen:(PhotoItem*)photoItem {
+    NSLog(@"setImageAndTextOnScreen called");
+
+    NSString* imageUrl = [photoItem imageUrl];
     NSLog(@"About to load image: %@ ", imageUrl);
 
     // uses https://github.com/rs/SDWebImage
@@ -336,7 +338,8 @@
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                             if (image) {
                                 // do something with image
-                                
+
+                                [self setDateAndPhotoNumberOnScreen:photoItem];
                                 // fade based on: http://stackoverflow.com/questions/11869390/ios-sdwebimage-fade-in-new-image
                                 [UIView transitionWithView:imageView
                                                   duration:2.0

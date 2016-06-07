@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		531EA6371D04EDDF00292D0C /* SDWebImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 531EA6361D04EDDF00292D0C /* SDWebImage.framework */; };
 		532533E31C32E43D00016730 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E21C32E43D00016730 /* main.m */; };
 		532533E61C32E43D00016730 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E51C32E43D00016730 /* AppDelegate.m */; };
 		532533E91C32E43D00016730 /* SlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 532533E81C32E43D00016730 /* SlideshowViewController.m */; };
@@ -22,10 +21,10 @@
 		539B934C1C4C3927000CC498 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 539B934B1C4C3927000CC498 /* OptionsViewController.m */; };
 		53AB65A81C41997C006163E1 /* work.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53AB65A71C41997C006163E1 /* work.txt */; };
 		53AB65AA1C41A3B5006163E1 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53AB65A91C41A3B5006163E1 /* readme.txt */; };
+		CC44D44D93A9BFEC9AF81E6E /* libPods-Bean on the Screen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAC1FB0CB2BEC0F53CAB9A9 /* libPods-Bean on the Screen.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		531EA6361D04EDDF00292D0C /* SDWebImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = "<group>"; };
 		532533DE1C32E43D00016730 /* Bean on the Screen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bean on the Screen.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		532533E21C32E43D00016730 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		532533E41C32E43D00016730 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -47,6 +46,9 @@
 		539B934B1C4C3927000CC498 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		53AB65A71C41997C006163E1 /* work.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = work.txt; sourceTree = "<group>"; };
 		53AB65A91C41A3B5006163E1 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		91B5140CF6F624FEDDF9034E /* Pods-Bean on the Screen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bean on the Screen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen.debug.xcconfig"; sourceTree = "<group>"; };
+		9AAC1FB0CB2BEC0F53CAB9A9 /* libPods-Bean on the Screen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Bean on the Screen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E77E94C0878226133253E463 /* Pods-Bean on the Screen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bean on the Screen.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,21 +56,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				531EA6371D04EDDF00292D0C /* SDWebImage.framework in Frameworks */,
 				535B1B061D04E46C00B843A9 /* ImageIO.framework in Frameworks */,
+				CC44D44D93A9BFEC9AF81E6E /* libPods-Bean on the Screen.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BA308986EA1A3BE1B35D15B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91B5140CF6F624FEDDF9034E /* Pods-Bean on the Screen.debug.xcconfig */,
+				E77E94C0878226133253E463 /* Pods-Bean on the Screen.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		532533D51C32E43D00016730 = {
 			isa = PBXGroup;
 			children = (
-				531EA6361D04EDDF00292D0C /* SDWebImage.framework */,
 				535B1B051D04E46C00B843A9 /* ImageIO.framework */,
 				532533E01C32E43D00016730 /* Bean on the Screen */,
 				532533DF1C32E43D00016730 /* Products */,
+				4BA308986EA1A3BE1B35D15B /* Pods */,
+				F1E0604293967A28EC5E713B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -115,6 +127,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F1E0604293967A28EC5E713B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AAC1FB0CB2BEC0F53CAB9A9 /* libPods-Bean on the Screen.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -122,10 +142,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532533F21C32E43E00016730 /* Build configuration list for PBXNativeTarget "Bean on the Screen" */;
 			buildPhases = (
+				42441E515E59A1EE7C21AD3B /* [CP] Check Pods Manifest.lock */,
 				532533DA1C32E43D00016730 /* Sources */,
 				532533DB1C32E43D00016730 /* Frameworks */,
 				532533DC1C32E43D00016730 /* Resources */,
 				539B934D1C4C45A1000CC498 /* ShellScript */,
+				172483C5DC7BCE73EB0B80A7 /* [CP] Embed Pods Frameworks */,
+				62A5E89EC49E4C14E5D5A8DF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -187,6 +210,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		172483C5DC7BCE73EB0B80A7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		42441E515E59A1EE7C21AD3B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		539B934D1C4C45A1000CC498 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -199,6 +252,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${DEVELOPER_BIN_DIR}/agvtool\" next-version -all";
+		};
+		62A5E89EC49E4C14E5D5A8DF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -312,22 +380,20 @@
 		};
 		532533F31C32E43E00016730 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91B5140CF6F624FEDDF9034E /* Pods-Bean on the Screen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 176;
+				CURRENT_PROJECT_VERSION = 184;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-force_load",
-					SDWebImage.framework/Versions/Current/SDWebImage,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
@@ -337,22 +403,20 @@
 		};
 		532533F41C32E43E00016730 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E77E94C0878226133253E463 /* Pods-Bean on the Screen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 176;
+				CURRENT_PROJECT_VERSION = 184;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-force_load",
-					SDWebImage.framework/Versions/Current/SDWebImage,
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";

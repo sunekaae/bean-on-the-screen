@@ -58,7 +58,8 @@
         NSLog(@"items already loaded. No need to retrieve them again");
         NSLog(@"about to schedule timer");
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self scheduleTimer];
+            //[self scheduleTimer];
+            [self loadFirstImage];
         });
     }
     

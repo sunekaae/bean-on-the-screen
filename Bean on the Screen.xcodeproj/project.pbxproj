@@ -251,7 +251,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${DEVELOPER_BIN_DIR}/agvtool\" next-version -all";
+			shellScript = "";
 		};
 		62A5E89EC49E4C14E5D5A8DF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -316,6 +316,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 213;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -338,6 +339,7 @@
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
+				VERSIONING_SYSTEM = "";
 			};
 			name = Debug;
 		};
@@ -359,6 +361,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 213;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -375,6 +378,7 @@
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 9.1;
 				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "";
 			};
 			name = Release;
 		};
@@ -386,7 +390,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 201;
+				CURRENT_PROJECT_VERSION = 213;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -397,7 +401,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
-				VERSIONING_SYSTEM = "apple-generic";
+				VERSIONING_SYSTEM = "";
 			};
 			name = Debug;
 		};
@@ -409,7 +413,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 201;
+				CURRENT_PROJECT_VERSION = 213;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -420,7 +424,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
-				VERSIONING_SYSTEM = "apple-generic";
+				VERSIONING_SYSTEM = "";
 			};
 			name = Release;
 		};

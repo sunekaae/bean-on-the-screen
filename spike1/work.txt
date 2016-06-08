@@ -4,6 +4,11 @@ Work.
 
 DONE
 
+1.0.5:
+- improvement: simple visual transition from each image to the next
+- bugfix: images are now always shown at least 5 seconds (long load times could previously result in an image being shown only very briefly)
+
+
 1.0.4:
 - improvement: text box behavior on login screen (thanks to chrisidefix, https://github.com/chrisidefix)
 

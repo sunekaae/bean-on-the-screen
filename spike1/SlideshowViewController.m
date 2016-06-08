@@ -6,6 +6,7 @@
 //  Copyright © 2015 Sune Kaae. All rights reserved.
 //
 
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "SlideshowViewController.h"
 #import "AppDelegate.h"
 #import "PhotoItem.h"
@@ -57,7 +58,8 @@
         NSLog(@"items already loaded. No need to retrieve them again");
         NSLog(@"about to schedule timer");
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self scheduleTimer];
+            //[self scheduleTimer];
+            [self loadFirstImage];
         });
     }
     
@@ -74,6 +76,18 @@
     NSLog(@"starting timer.");
     timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(tick) userInfo:nil repeats:YES];
     [self tick];
+}
+
+-(void)loadFirstImage
+{
+    NSLog(@"loading first image, no automatic repeat");
+    [self tick];
+}
+
+-(void)scheduleATick
+{
+    NSLog(@"tick in 5 seconds");
+    timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(tick) userInfo:nil repeats:NO];
 }
 
 -(void) initStuff {
@@ -186,7 +200,8 @@
     [self randomizeArrayOrder];
     NSLog(@"creating async call for schedule timer");
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self scheduleTimer];
+        //[self scheduleTimer];
+        [self loadFirstImage];
     });
     NSLog(@"done with fetched data");
 }
@@ -299,14 +314,43 @@
 -(void)setPhotoItemOnScreen:(PhotoItem*)photoItem {
     NSLog(@"About to set photo item on screen url");
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self setImageOnScreen:photoItem.imageUrl];
-        [self setDateAndPhotoNumberOnScreen:photoItem];
+        [self setImageAndTextOnScreen:photoItem];
     });
 }
 
--(void)setImageOnScreen:(NSString*)imageUrl {
+-(void)setImageAndTextOnScreen:(PhotoItem*)photoItem {
+    NSLog(@"setImageAndTextOnScreen called");
+
+    NSString* imageUrl = [photoItem imageUrl];
     NSLog(@"About to load image: %@ ", imageUrl);
-    imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageUrl]]];
+
+    // uses https://github.com/rs/SDWebImage
+    //[imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]];
+    
+    // https://github.com/rs/SDWebImage
+    
+    // request image
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [manager downloadImageWithURL:[NSURL URLWithString:imageUrl]
+                          options:0
+                         progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                             // progression tracking code
+                         }
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                                // do something with image
+
+                                [self setDateAndPhotoNumberOnScreen:photoItem];
+                                // fade based on: http://stackoverflow.com/questions/11869390/ios-sdwebimage-fade-in-new-image
+                                [UIView transitionWithView:imageView
+                                                  duration:2.0
+                                                   options:UIViewAnimationOptionTransitionCrossDissolve
+                                                animations:^{
+                                                    [imageView setImage:image];
+                                                } completion:NULL];
+                                [self scheduleATick];
+                            }
+                        }];
 }
 
 -(void)setDateAndPhotoNumberOnScreen:(PhotoItem*)photoItem {

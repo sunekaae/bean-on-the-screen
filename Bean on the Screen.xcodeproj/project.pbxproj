@@ -15,11 +15,13 @@
 		532533FA1C32FA0500016730 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 532533F91C32FA0500016730 /* View.xib */; };
 		532534031C3328E200016730 /* example_response in Resources */ = {isa = PBXBuildFile; fileRef = 532534021C3328E200016730 /* example_response */; };
 		532534051C34114A00016730 /* green-beans-570px.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 532534041C34114A00016730 /* green-beans-570px.jpg */; };
+		535B1B061D04E46C00B843A9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 535B1B051D04E46C00B843A9 /* ImageIO.framework */; };
 		538C1F201C3D9ADE00157BC7 /* PhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */; };
 		539B93491C4C2FBB000CC498 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 539B93481C4C2FBB000CC498 /* LoginViewController.m */; };
 		539B934C1C4C3927000CC498 /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 539B934B1C4C3927000CC498 /* OptionsViewController.m */; };
 		53AB65A81C41997C006163E1 /* work.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53AB65A71C41997C006163E1 /* work.txt */; };
 		53AB65AA1C41A3B5006163E1 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53AB65A91C41A3B5006163E1 /* readme.txt */; };
+		CC44D44D93A9BFEC9AF81E6E /* libPods-Bean on the Screen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAC1FB0CB2BEC0F53CAB9A9 /* libPods-Bean on the Screen.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,7 @@
 		532533F91C32FA0500016730 /* View.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		532534021C3328E200016730 /* example_response */ = {isa = PBXFileReference; lastKnownFileType = folder; path = example_response; sourceTree = "<group>"; };
 		532534041C34114A00016730 /* green-beans-570px.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "green-beans-570px.jpg"; sourceTree = "<group>"; };
+		535B1B051D04E46C00B843A9 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		538C1F1E1C3D9ADE00157BC7 /* PhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoItem.h; sourceTree = "<group>"; };
 		538C1F1F1C3D9ADE00157BC7 /* PhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoItem.m; sourceTree = "<group>"; };
 		539B93471C4C2FBB000CC498 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
@@ -43,6 +46,9 @@
 		539B934B1C4C3927000CC498 /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		53AB65A71C41997C006163E1 /* work.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = work.txt; sourceTree = "<group>"; };
 		53AB65A91C41A3B5006163E1 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		91B5140CF6F624FEDDF9034E /* Pods-Bean on the Screen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bean on the Screen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen.debug.xcconfig"; sourceTree = "<group>"; };
+		9AAC1FB0CB2BEC0F53CAB9A9 /* libPods-Bean on the Screen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Bean on the Screen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E77E94C0878226133253E463 /* Pods-Bean on the Screen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bean on the Screen.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,17 +56,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				535B1B061D04E46C00B843A9 /* ImageIO.framework in Frameworks */,
+				CC44D44D93A9BFEC9AF81E6E /* libPods-Bean on the Screen.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BA308986EA1A3BE1B35D15B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				91B5140CF6F624FEDDF9034E /* Pods-Bean on the Screen.debug.xcconfig */,
+				E77E94C0878226133253E463 /* Pods-Bean on the Screen.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		532533D51C32E43D00016730 = {
 			isa = PBXGroup;
 			children = (
+				535B1B051D04E46C00B843A9 /* ImageIO.framework */,
 				532533E01C32E43D00016730 /* Bean on the Screen */,
 				532533DF1C32E43D00016730 /* Products */,
+				4BA308986EA1A3BE1B35D15B /* Pods */,
+				F1E0604293967A28EC5E713B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,6 +127,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F1E0604293967A28EC5E713B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AAC1FB0CB2BEC0F53CAB9A9 /* libPods-Bean on the Screen.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -114,10 +142,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 532533F21C32E43E00016730 /* Build configuration list for PBXNativeTarget "Bean on the Screen" */;
 			buildPhases = (
+				42441E515E59A1EE7C21AD3B /* [CP] Check Pods Manifest.lock */,
 				532533DA1C32E43D00016730 /* Sources */,
 				532533DB1C32E43D00016730 /* Frameworks */,
 				532533DC1C32E43D00016730 /* Resources */,
 				539B934D1C4C45A1000CC498 /* ShellScript */,
+				172483C5DC7BCE73EB0B80A7 /* [CP] Embed Pods Frameworks */,
+				62A5E89EC49E4C14E5D5A8DF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -179,6 +210,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		172483C5DC7BCE73EB0B80A7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		42441E515E59A1EE7C21AD3B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		539B934D1C4C45A1000CC498 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -191,6 +252,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${DEVELOPER_BIN_DIR}/agvtool\" next-version -all";
+		};
+		62A5E89EC49E4C14E5D5A8DF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bean on the Screen/Pods-Bean on the Screen-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -304,14 +380,20 @@
 		};
 		532533F31C32E43E00016730 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91B5140CF6F624FEDDF9034E /* Pods-Bean on the Screen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 201;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";
@@ -321,14 +403,20 @@
 		};
 		532533F41C32E43E00016730 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E77E94C0878226133253E463 /* Pods-Bean on the Screen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 161;
+				CURRENT_PROJECT_VERSION = 201;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = spike1/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nanhudi.beanscreen;
 				PRODUCT_NAME = "Bean on the Screen";
 				PROVISIONING_PROFILE = "";

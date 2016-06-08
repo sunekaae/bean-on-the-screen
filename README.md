@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sunekaae/bean-on-the-screen.svg?branch=master)](https://travis-ci.org/sunekaae/bean-on-the-screen)
+
 # bean-on-the-screen
 
 source-code for Apple TV app  which shows a slideshow of pictures in your Tinybeans account.
